@@ -1,0 +1,15 @@
+C:\Users\Kesid Dewa\Bootcamp\Day1-LogicExcersice\bin\Debug\net8.0\Day1-LogicExcersice.exe
+C:\Users\Kesid Dewa\Bootcamp\Day1-LogicExcersice\bin\Debug\net8.0\Day1-LogicExcersice.deps.json
+C:\Users\Kesid Dewa\Bootcamp\Day1-LogicExcersice\bin\Debug\net8.0\Day1-LogicExcersice.runtimeconfig.json
+C:\Users\Kesid Dewa\Bootcamp\Day1-LogicExcersice\bin\Debug\net8.0\Day1-LogicExcersice.dll
+C:\Users\Kesid Dewa\Bootcamp\Day1-LogicExcersice\bin\Debug\net8.0\Day1-LogicExcersice.pdb
+C:\Users\Kesid Dewa\Bootcamp\Day1-LogicExcersice\obj\Debug\net8.0\Day1-LogicExcersice.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kesid Dewa\Bootcamp\Day1-LogicExcersice\obj\Debug\net8.0\Day1-LogicExcersice.AssemblyInfoInputs.cache
+C:\Users\Kesid Dewa\Bootcamp\Day1-LogicExcersice\obj\Debug\net8.0\Day1-LogicExcersice.AssemblyInfo.cs
+C:\Users\Kesid Dewa\Bootcamp\Day1-LogicExcersice\obj\Debug\net8.0\Day1-LogicExcersice.csproj.CoreCompileInputs.cache
+C:\Users\Kesid Dewa\Bootcamp\Day1-LogicExcersice\obj\Debug\net8.0\Day1-LogicExcersice.sourcelink.json
+C:\Users\Kesid Dewa\Bootcamp\Day1-LogicExcersice\obj\Debug\net8.0\Day1-LogicExcersice.dll
+C:\Users\Kesid Dewa\Bootcamp\Day1-LogicExcersice\obj\Debug\net8.0\refint\Day1-LogicExcersice.dll
+C:\Users\Kesid Dewa\Bootcamp\Day1-LogicExcersice\obj\Debug\net8.0\Day1-LogicExcersice.pdb
+C:\Users\Kesid Dewa\Bootcamp\Day1-LogicExcersice\obj\Debug\net8.0\Day1-LogicExcersice.genruntimeconfig.cache
+C:\Users\Kesid Dewa\Bootcamp\Day1-LogicExcersice\obj\Debug\net8.0\ref\Day1-LogicExcersice.dll
