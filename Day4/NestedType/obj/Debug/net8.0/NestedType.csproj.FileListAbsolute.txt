@@ -1,0 +1,15 @@
+C:\Users\Kesid Dewa\Bootcamp\Day4\NestedType\bin\Debug\net8.0\NestedType.exe
+C:\Users\Kesid Dewa\Bootcamp\Day4\NestedType\bin\Debug\net8.0\NestedType.deps.json
+C:\Users\Kesid Dewa\Bootcamp\Day4\NestedType\bin\Debug\net8.0\NestedType.runtimeconfig.json
+C:\Users\Kesid Dewa\Bootcamp\Day4\NestedType\bin\Debug\net8.0\NestedType.dll
+C:\Users\Kesid Dewa\Bootcamp\Day4\NestedType\bin\Debug\net8.0\NestedType.pdb
+C:\Users\Kesid Dewa\Bootcamp\Day4\NestedType\obj\Debug\net8.0\NestedType.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kesid Dewa\Bootcamp\Day4\NestedType\obj\Debug\net8.0\NestedType.AssemblyInfoInputs.cache
+C:\Users\Kesid Dewa\Bootcamp\Day4\NestedType\obj\Debug\net8.0\NestedType.AssemblyInfo.cs
+C:\Users\Kesid Dewa\Bootcamp\Day4\NestedType\obj\Debug\net8.0\NestedType.csproj.CoreCompileInputs.cache
+C:\Users\Kesid Dewa\Bootcamp\Day4\NestedType\obj\Debug\net8.0\NestedType.sourcelink.json
+C:\Users\Kesid Dewa\Bootcamp\Day4\NestedType\obj\Debug\net8.0\NestedType.dll
+C:\Users\Kesid Dewa\Bootcamp\Day4\NestedType\obj\Debug\net8.0\refint\NestedType.dll
+C:\Users\Kesid Dewa\Bootcamp\Day4\NestedType\obj\Debug\net8.0\NestedType.pdb
+C:\Users\Kesid Dewa\Bootcamp\Day4\NestedType\obj\Debug\net8.0\NestedType.genruntimeconfig.cache
+C:\Users\Kesid Dewa\Bootcamp\Day4\NestedType\obj\Debug\net8.0\ref\NestedType.dll

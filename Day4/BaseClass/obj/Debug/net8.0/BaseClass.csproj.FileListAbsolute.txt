@@ -1,0 +1,15 @@
+C:\Users\Kesid Dewa\Bootcamp\Day4\BaseClass\bin\Debug\net8.0\BaseClass.exe
+C:\Users\Kesid Dewa\Bootcamp\Day4\BaseClass\bin\Debug\net8.0\BaseClass.deps.json
+C:\Users\Kesid Dewa\Bootcamp\Day4\BaseClass\bin\Debug\net8.0\BaseClass.runtimeconfig.json
+C:\Users\Kesid Dewa\Bootcamp\Day4\BaseClass\bin\Debug\net8.0\BaseClass.dll
+C:\Users\Kesid Dewa\Bootcamp\Day4\BaseClass\bin\Debug\net8.0\BaseClass.pdb
+C:\Users\Kesid Dewa\Bootcamp\Day4\BaseClass\obj\Debug\net8.0\BaseClass.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kesid Dewa\Bootcamp\Day4\BaseClass\obj\Debug\net8.0\BaseClass.AssemblyInfoInputs.cache
+C:\Users\Kesid Dewa\Bootcamp\Day4\BaseClass\obj\Debug\net8.0\BaseClass.AssemblyInfo.cs
+C:\Users\Kesid Dewa\Bootcamp\Day4\BaseClass\obj\Debug\net8.0\BaseClass.csproj.CoreCompileInputs.cache
+C:\Users\Kesid Dewa\Bootcamp\Day4\BaseClass\obj\Debug\net8.0\BaseClass.sourcelink.json
+C:\Users\Kesid Dewa\Bootcamp\Day4\BaseClass\obj\Debug\net8.0\BaseClass.dll
+C:\Users\Kesid Dewa\Bootcamp\Day4\BaseClass\obj\Debug\net8.0\refint\BaseClass.dll
+C:\Users\Kesid Dewa\Bootcamp\Day4\BaseClass\obj\Debug\net8.0\BaseClass.pdb
+C:\Users\Kesid Dewa\Bootcamp\Day4\BaseClass\obj\Debug\net8.0\BaseClass.genruntimeconfig.cache
+C:\Users\Kesid Dewa\Bootcamp\Day4\BaseClass\obj\Debug\net8.0\ref\BaseClass.dll
