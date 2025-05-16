@@ -1,0 +1,15 @@
+C:\Users\Kesid Dewa\Bootcamp\Day3\UpcastDowncast\bin\Debug\net8.0\UpcastDowncast.exe
+C:\Users\Kesid Dewa\Bootcamp\Day3\UpcastDowncast\bin\Debug\net8.0\UpcastDowncast.deps.json
+C:\Users\Kesid Dewa\Bootcamp\Day3\UpcastDowncast\bin\Debug\net8.0\UpcastDowncast.runtimeconfig.json
+C:\Users\Kesid Dewa\Bootcamp\Day3\UpcastDowncast\bin\Debug\net8.0\UpcastDowncast.dll
+C:\Users\Kesid Dewa\Bootcamp\Day3\UpcastDowncast\bin\Debug\net8.0\UpcastDowncast.pdb
+C:\Users\Kesid Dewa\Bootcamp\Day3\UpcastDowncast\obj\Debug\net8.0\UpcastDowncast.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kesid Dewa\Bootcamp\Day3\UpcastDowncast\obj\Debug\net8.0\UpcastDowncast.AssemblyInfoInputs.cache
+C:\Users\Kesid Dewa\Bootcamp\Day3\UpcastDowncast\obj\Debug\net8.0\UpcastDowncast.AssemblyInfo.cs
+C:\Users\Kesid Dewa\Bootcamp\Day3\UpcastDowncast\obj\Debug\net8.0\UpcastDowncast.csproj.CoreCompileInputs.cache
+C:\Users\Kesid Dewa\Bootcamp\Day3\UpcastDowncast\obj\Debug\net8.0\UpcastDowncast.sourcelink.json
+C:\Users\Kesid Dewa\Bootcamp\Day3\UpcastDowncast\obj\Debug\net8.0\UpcastDowncast.dll
+C:\Users\Kesid Dewa\Bootcamp\Day3\UpcastDowncast\obj\Debug\net8.0\refint\UpcastDowncast.dll
+C:\Users\Kesid Dewa\Bootcamp\Day3\UpcastDowncast\obj\Debug\net8.0\UpcastDowncast.pdb
+C:\Users\Kesid Dewa\Bootcamp\Day3\UpcastDowncast\obj\Debug\net8.0\UpcastDowncast.genruntimeconfig.cache
+C:\Users\Kesid Dewa\Bootcamp\Day3\UpcastDowncast\obj\Debug\net8.0\ref\UpcastDowncast.dll
