@@ -1,7 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Dynamic;
-
-class Program
+﻿class Program
 {
     public delegate void AddNum(int a, int b);
     public delegate void SubNum(int a, int b);
