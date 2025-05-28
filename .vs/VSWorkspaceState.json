@@ -3,9 +3,12 @@
     "",
     "\\Individual Project",
     "\\Individual Project\\Chess",
+    "\\Individual Project\\Chess\\Controller",
     "\\Individual Project\\Chess\\Enums",
     "\\Individual Project\\Chess\\Interface",
-    "\\Individual Project\\Chess\\Model"
+    "\\Individual Project\\Chess\\Model",
+    "\\Individual Project\\Chess\\Pieces"
   ],
+  "SelectedNode": "\\Individual Project\\Chess\\Pieces\\King.cs",
   "PreviewInSolutionExplorer": false
 }

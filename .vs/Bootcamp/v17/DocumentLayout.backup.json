@@ -38,9 +38,9 @@
               "Title": "Board.cs",
               "DocumentMoniker": "D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Model\\Board.cs",
               "RelativeDocumentMoniker": "Individual Project\\Chess\\Model\\Board.cs",
-              "ToolTip": "D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Model\\Board.cs*",
-              "RelativeToolTip": "Individual Project\\Chess\\Model\\Board.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "ToolTip": "D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Model\\Board.cs",
+              "RelativeToolTip": "Individual Project\\Chess\\Model\\Board.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-27T14:17:44.484Z",
               "EditorCaption": ""
@@ -55,8 +55,7 @@
               "RelativeToolTip": "Individual Project\\Chess\\Interface\\IBoard.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T14:17:04.18Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-27T14:17:04.18Z"
             },
             {
               "$type": "Document",
@@ -68,8 +67,7 @@
               "RelativeToolTip": "Individual Project\\Chess\\Interface\\IPlayer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T14:11:19.927Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-27T14:11:19.927Z"
             },
             {
               "$type": "Document",
@@ -81,8 +79,7 @@
               "RelativeToolTip": "Individual Project\\Chess\\Model\\Player.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T14:10:14.495Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-27T14:10:14.495Z"
             }
           ]
         }
