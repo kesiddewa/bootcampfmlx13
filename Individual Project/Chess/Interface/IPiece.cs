@@ -1,12 +1,11 @@
-using Chess;
-
-public class IPiece
+namespace Chess;
+public interface IPiece
 {
-    bool IsAlive { get; }
-    Color Color { get; }
-    Cell Position { get; set; }
-    PieceEnum Piece { get; }
-    int Ordinal { get; }
+    bool isAlive { get; set; }
+    Color color { get; set; }
+    Cell position { get; set; }
+    PieceEnum piece { get; set; }
+    int ordinal { get; set; }
 
     List<Cell> GetMovePattern();
     bool GetIsAlive();
