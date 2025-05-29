@@ -8,12 +8,12 @@ public class Bishop : IPiece
     public int ordinal { get; set; }
 
 
-    public Bishop(bool isAlive, Color color, Cell position, PieceEnum piece, int ordinal)
+    public Bishop(bool isAlive, Color color, Cell position, int ordinal)
     {
         this.isAlive = isAlive;
         this.color = color;
         this.position = position;
-        this.piece = piece; // e.g., PieceEnum.Bishop
+        this.piece = PieceEnum.Bishop; // e.g., PieceEnum.Bishop
         this.ordinal = ordinal;
     }
 

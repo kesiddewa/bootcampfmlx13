@@ -34,7 +34,49 @@ public class Board : IBoard
         {
             if (!piece.GetIsAlive()) continue;
             var pos = piece.GetPosition();
-            board[pos.row - 1, pos.column - 'A'] = piece.GetPieceType().ToString()[0].ToString();
+
+            PieceEnum pieceType = piece.GetPieceType();
+            Color pieceColor = piece.GetColor();
+            string unicodePieceChar = " ";
+
+            switch (pieceColor)
+            {
+                case Color.White: // Menggunakan PieceColor
+                    switch (pieceType)
+                    {
+                        case PieceEnum.King: unicodePieceChar = "♔"; break; // Menggunakan PieceType
+                        case PieceEnum.Queen: unicodePieceChar = "♕"; break;
+                        case PieceEnum.Rook: unicodePieceChar = "♖"; break;
+                        case PieceEnum.Bishop: unicodePieceChar = "♗"; break;
+                        case PieceEnum.Knight: unicodePieceChar = "♘"; break;
+                        case PieceEnum.Pawn: unicodePieceChar = "♙"; break;
+                    }
+                    break;
+                case Color.Black: // Menggunakan PieceColor
+                    switch (pieceType)
+                    {
+                        case PieceEnum.King: unicodePieceChar = "♚"; break; // Menggunakan PieceType
+                        case PieceEnum.Queen: unicodePieceChar = "♛"; break;
+                        case PieceEnum.Rook: unicodePieceChar = "♜"; break;
+                        case PieceEnum.Bishop: unicodePieceChar = "♝"; break;
+                        case PieceEnum.Knight: unicodePieceChar = "♞"; break;
+                        case PieceEnum.Pawn: unicodePieceChar = "♟"; break;
+                    }
+                    break;
+            }
+
+            int arrayRow = 8 - pos.row;
+            int arrayCol = pos.column - 'A';
+
+            if (arrayRow >= 0 && arrayRow < board.GetLength(0) &&
+                arrayCol >= 0 && arrayCol < board.GetLength(1))
+            {
+                board[arrayRow, arrayCol] = unicodePieceChar;
+            }
+            else
+            {
+                Console.WriteLine($"Peringatan: Bidak {pieceType} {pieceColor} berada di posisi tidak valid ({pos.row},{pos.column})");
+            }
         }
     }
 }

@@ -1,18 +1,21 @@
-public class King {
+using Chess;
+
+public class King : IPiece
+{
     public bool isAlive { get; set; }
     public Color color { get; set; }
     public Cell position { get; set; }
     public PieceEnum piece { get; set; }
     public int ordinal { get; set; }
-    public bool isCanCastling {get; set;}
+    public bool isCanCastling { get; set; }
 
 
-    public King(bool isAlive, Color color, Cell position, PieceEnum piece, int ordinal)
+    public King(bool isAlive, Color color, Cell position, int ordinal)
     {
         this.isAlive = isAlive;
         this.color = color;
         this.position = position;
-        this.piece = piece; // e.g., PieceEnum.King
+        this.piece = PieceEnum.King; // e.g., PieceEnum.King
         this.ordinal = ordinal;
         this.isCanCastling = true;
     }

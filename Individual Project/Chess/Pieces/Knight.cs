@@ -8,12 +8,12 @@ public class Knight : IPiece
     public int ordinal { get; set; }
 
 
-    public Knight(bool isAlive, Color color, Cell position, PieceEnum piece, int ordinal)
+    public Knight(bool isAlive, Color color, Cell position, int ordinal)
     {
         this.isAlive = isAlive;
         this.color = color;
         this.position = position;
-        this.piece = piece; // e.g., PieceEnum.Knight
+        this.piece = PieceEnum.Knight; // e.g., PieceEnum.Knight
         this.ordinal = ordinal;
     }
 

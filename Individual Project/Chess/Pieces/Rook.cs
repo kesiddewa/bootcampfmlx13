@@ -8,12 +8,12 @@ public class Rook : IPiece
     public int ordinal { get; set; }
 
 
-    public Rook(bool isAlive, Color color, Cell position, PieceEnum piece, int ordinal)
+    public Rook(bool isAlive, Color color, Cell position, int ordinal)
     {
         this.isAlive = isAlive;
         this.color = color;
         this.position = position;
-        this.piece = piece; // e.g., PieceEnum.Queen
+        this.piece = PieceEnum.Rook; // e.g., PieceEnum.Queen
         this.ordinal = ordinal;
     }
 

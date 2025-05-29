@@ -10,12 +10,12 @@ public class Pawn : IPiece
     public bool isCanEnPassant { get; set; }
 
 
-    public Pawn(bool isAlive, Color color, Cell position, PieceEnum piece, int ordinal)
+    public Pawn(bool isAlive, Color color, Cell position, int ordinal)
     {
         this.isAlive = isAlive;
         this.color = color;
         this.position = position;
-        this.piece = piece; // e.g., PieceEnum.Pawn
+        this.piece = PieceEnum.Pawn; // e.g., PieceEnum.Pawn
         this.ordinal = ordinal;
         this.isFirstMove = true;
         this.isCanEnPassant = false;
