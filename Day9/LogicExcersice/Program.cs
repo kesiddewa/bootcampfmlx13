@@ -16,7 +16,7 @@ namespace MyApp
                 if (i % 4 == 0) output += "baz";
                 if (i % 5 == 0) output += "bar";
                 if (i % 9 == 0) output += "huzz";
-                else if (i % 7 == 0) output += "jazz";
+                if (i % 7 == 0) output += "jazz";
 
                 Console.Write((output == "" ? i.ToString() : output) + ", ");
             }
