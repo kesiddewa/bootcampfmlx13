@@ -15,7 +15,7 @@ public class King : IPiece
         this.isAlive = isAlive;
         this.color = color;
         this.position = position;
-        this.piece = PieceEnum.King; // e.g., PieceEnum.King
+        this.piece = PieceEnum.King;
         this.ordinal = ordinal;
         this.isCanCastling = true;
     }

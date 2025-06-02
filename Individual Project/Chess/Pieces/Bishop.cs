@@ -13,7 +13,7 @@ public class Bishop : IPiece
         this.isAlive = isAlive;
         this.color = color;
         this.position = position;
-        this.piece = PieceEnum.Bishop; // e.g., PieceEnum.Bishop
+        this.piece = PieceEnum.Bishop;
         this.ordinal = ordinal;
     }
 

@@ -13,7 +13,7 @@ public class Rook : IPiece
         this.isAlive = isAlive;
         this.color = color;
         this.position = position;
-        this.piece = PieceEnum.Rook; // e.g., PieceEnum.Queen
+        this.piece = PieceEnum.Rook;
         this.ordinal = ordinal;
     }
 

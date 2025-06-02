@@ -1,4 +1,3 @@
-using System.Xml.Schema;
 using Chess;
 
 public class GameController
@@ -15,32 +14,38 @@ public class GameController
         this.board = board;
         status = Status.Normal;
     }
-    public bool ValidatePiece(Cell pieceCell) 
+    public bool ValidatePiece(Cell pieceCell)
     {
         IPiece selectPiece = pieces.FirstOrDefault(p => p.GetPosition().Equals(pieceCell) && p.GetIsAlive());
-        if (selectPiece == null){
+        if (selectPiece == null)
+        {
             System.Console.WriteLine("Tidak ada bidak di posisi tersebut");
             return false;
         }
-        if (selectPiece.GetColor() != players[0].GetColor()){
+        if (selectPiece.GetColor() != players[0].GetColor())
+        {
             System.Console.WriteLine("Bidak tersebut bukan milik pemain ini");
             return false;
         }
         return true;
     }
 
-    public bool ValidateDestination(IPiece piece, Cell destinationCell) {
+    public bool ValidateDestination(IPiece piece, Cell destinationCell)
+    {
         IPiece pieceAtDest = pieces.FirstOrDefault(p => p.GetPosition().Equals(destinationCell) && p.GetIsAlive());
-        if (pieceAtDest != null && pieceAtDest.GetColor() == piece.GetColor()) {
+        if (pieceAtDest != null && pieceAtDest.GetColor() == piece.GetColor())
+        {
             System.Console.WriteLine();
             return false;
         }
         return true;
     }
 
-    public bool ValidateMove(IPiece piece, Cell destinationCell) {
+    public bool ValidateMove(IPiece piece, Cell destinationCell)
+    {
         List<Cell> possibleMoves = piece.GetMovePattern();
-        if (!possibleMoves.Contains(destinationCell)) {
+        if (!possibleMoves.Contains(destinationCell))
+        {
             System.Console.WriteLine("Gerakan bidak tidak valid.");
             return false;
         }
@@ -56,23 +61,28 @@ public class GameController
 
     // }
 
-    
+
 
     public void PieceMove(IPiece pieceToMove, Cell destinationCell)
     {
         IPiece pieceAtDest = pieces.FirstOrDefault(p => p.GetPosition().Equals(destinationCell) && p.GetIsAlive());
-        if (pieceAtDest != null && pieceAtDest.GetColor() == pieceToMove.GetColor()){
+        if (pieceAtDest != null && pieceAtDest.GetColor() == pieceToMove.GetColor())
+        {
             pieceAtDest.SetIsAlive(false);
             System.Console.WriteLine($"{pieceAtDest.GetPieceType()} milik {pieceAtDest.GetColor()} ditangkap!");
         }
 
+        CaptureOpponentPiece(destinationCell, pieceToMove.GetColor());
+
         pieceToMove.SetPosition(destinationCell);
 
-        if (pieceToMove is Pawn pawn) {
+        if (pieceToMove is Pawn pawn)
+        {
             pawn.isFirstMove = false;
-            if ((pawn.GetColor() == Color.White && destinationCell.row == 7) || 
-                (pawn.GetColor() == Color.Black && destinationCell.row == 0)) {
-                    PromotePawn(pawn);
+            if ((pawn.GetColor() == Color.White && destinationCell.row == 7) ||
+                (pawn.GetColor() == Color.Black && destinationCell.row == 0))
+            {
+                PromotePawn(pawn);
             }
         }
         if (pieceToMove is King king) king.isCanCastling = false;
@@ -80,36 +90,58 @@ public class GameController
         board.SetBoard(pieces);
     }
 
-    public void PlayerMove(Cell fromCell, Cell toCell) {
-        if (!ValidatePiece(fromCell)) {
+    public void PlayerMove(Cell fromCell, Cell toCell)
+    {
+        if (!ValidatePiece(fromCell))
+        {
             System.Console.WriteLine("Pilihan bidak tidak valid.");
             return;
         }
 
         IPiece pieceToMove = pieces.FirstOrDefault(p => p.GetPosition().Equals(fromCell) && p.GetIsAlive());
-        if (pieceToMove == null) {
-            System.Console.WriteLine("Bidak tidak ditemukan.");
+        if (pieceToMove == null)
+        {
             return;
         }
 
-        if (!ValidateDestination(pieceToMove, toCell) || !ValidateMove(pieceToMove, toCell)) {
-            System.Console.WriteLine("Langkah tidak valid.");
+        if (!ValidateDestination(pieceToMove, toCell) || !ValidateMove(pieceToMove, toCell))
+        {
             return;
         }
 
         PieceMove(pieceToMove, toCell);
         System.Console.WriteLine("Langkah berhasil.");
 
+        if (players.Count > 1)
+        {
+            IPlayer movePlayer = players[0];
+            players.RemoveAt(0);
+            players.Add(movePlayer);
+        }
+    }
+
+    public void CaptureOpponentPiece(Cell destinationCell, Color pieceColor)
+    {
+        IPiece opponentPiece = pieces.FirstOrDefault(p => p.GetPosition().Equals(destinationCell) && p.GetIsAlive() && p.GetColor() != pieceColor);
+        if (opponentPiece != null)
+        {
+            opponentPiece.SetIsAlive(false);
+            System.Console.WriteLine($"{opponentPiece.GetPieceType()} milik {opponentPiece.GetColor()} ditangkap!");
+        }
     }
 
     public IPiece PromotePawn(Pawn pawn)
     {
         Queen newQueen = new Queen(true, pawn.GetColor(), pawn.GetPosition(), pawn.GetPieceOrdinal());
-        if (this.pieces != null) {
+        if (this.pieces != null)
+        {
             int index = this.pieces.IndexOf(pawn);
-            if (index != -1) {
+            if (index != -1)
+            {
                 this.pieces[index] = newQueen;
-            } else {
+            }
+            else
+            {
                 this.pieces.Remove(pawn);
                 this.pieces.Add(newQueen);
             }
