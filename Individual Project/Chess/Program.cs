@@ -18,6 +18,50 @@ public class Program
         View gameView = new View();
         game.StartGame();
         gameView.RenderView(game.board.board);
+
+                    while(game.status == Status.Normal || game.status == Status.Check)
+            {
+                Console.WriteLine($"Giliran Pemain: {game.players[0].GetColor()}");
+                Console.Write("Masukkan langkah (misal: e2 e4), atau 'exit' untuk keluar: ");
+                string input = Console.ReadLine();
+
+                if (input.ToLower() == "exit")
+                {
+                    Console.WriteLine("Keluar dari permainan.");
+                    break;
+                }
+
+                string[] parts = input.Split(' ');
+                if (parts.Length != 2 || parts[0].Length != 2 || parts[1].Length != 2)
+                {
+                    Console.WriteLine("Format input tidak valid. Contoh: e2 e4");
+                    continue;
+                }
+
+                try
+                {
+                    Cell fromCell = new Cell(int.Parse(parts[0][1].ToString()), parts[0][0]);
+                    Cell toCell = new Cell(int.Parse(parts[1][1].ToString()), parts[1][0]);
+
+                    // Validasi input sel dasar
+                    if (fromCell.column < 'a' || fromCell.column > 'h' || fromCell.row < 1 || fromCell.row > 8 ||
+                        toCell.column < 'a' || toCell.column > 'h' || toCell.row < 1 || toCell.row > 8)
+                    {
+                        Console.WriteLine("Koordinat sel tidak valid.");
+                        continue;
+                    }
+                    
+                    game.PlayerMove(fromCell, toCell); // Panggil metode yang dimodifikasi
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Format baris pada input sel tidak valid (harus angka).");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Terjadi kesalahan: {ex.Message}");
+                }
+            }
     }
     public static void SetupInitialPieces(List<IPiece> pieces)
     {
