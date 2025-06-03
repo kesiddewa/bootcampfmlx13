@@ -13,7 +13,7 @@ public class Knight : IPiece
         this.isAlive = isAlive;
         this.color = color;
         this.position = position;
-        this.piece = PieceEnum.Knight; // e.g., PieceEnum.Knight
+        this.piece = PieceEnum.Knight;
         this.ordinal = ordinal;
     }
 

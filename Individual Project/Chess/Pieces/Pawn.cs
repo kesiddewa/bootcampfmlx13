@@ -22,14 +22,8 @@ public class Pawn : IPiece
         this.isCanEnPassant = false;
     }
 
-    //fix this method to return corrrect move for pawn
-    public List<Cell> GetMovePattern()
-    {
-        return new List<Cell>();
-    }
-
     //should be the correct method to return move for pawn
-    public List<Cell> GetMovePattern(List<IPiece> pieces)
+    public List<Cell> GetMovePattern()
     {
         var moves = new List<Cell>();
         int direction = color == Color.White ? 1 : -1;
