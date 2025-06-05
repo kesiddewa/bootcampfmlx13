@@ -3,7 +3,7 @@ namespace Chess;
 public class Pawn : IPiece
 {
     public bool isAlive { get; set; }
-    public Color color { get; set; }
+    public Color color { get; set; }    
     public Cell position { get; set; }
     public PieceEnum piece { get; set; }
     public int ordinal { get; set; }
