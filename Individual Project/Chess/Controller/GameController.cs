@@ -43,13 +43,34 @@ public class GameController
 
     public bool ValidateMove(IPiece piece, Cell destinationCell)
     {
-        List<Cell> possibleMoves = piece.GetMovePattern();
-        if (!possibleMoves.Contains(destinationCell))
+    List<Cell> possibleMoves = piece.GetMovePattern();
+
+    // Check if the destination cell is within the possible moves
+    if (!possibleMoves.Contains(destinationCell))
+    {
+        System.Console.WriteLine("Gerakan bidak tidak valid.");
+        return false;
+    }
+
+    // Additional condition for pawn diagonal movement
+    if (piece is Pawn pawn)
+    {
+        int rowDiff = Math.Abs(destinationCell.row - piece.GetPosition().row);
+        int colDiff = Math.Abs(destinationCell.column - piece.GetPosition().column);
+
+        // If the pawn moves diagonally, ensure it is capturing an opponent piece
+        if (rowDiff == 1 && colDiff == 1)
         {
-            System.Console.WriteLine("Gerakan bidak tidak valid.");
-            return false;
+            IPiece pieceAtDest = pieces.FirstOrDefault(p => p.GetPosition().Equals(destinationCell) && p.GetIsAlive());
+            if (pieceAtDest == null || pieceAtDest.GetColor() == piece.GetColor())
+            {
+                System.Console.WriteLine("Pion tidak dapat bergerak secara diagonal kecuali menangkap bidak lawan.");
+                return false;
+            }
         }
-        return true;
+    }
+
+    return true;
     }
 
     // public bool ValidateChecked()

@@ -27,24 +27,14 @@ public class Pawn : IPiece
     {
         var moves = new List<Cell>();
         int direction = color == Color.White ? 1 : -1;
-        Cell forward = new Cell(position.row + direction, position.column);
-        if (!pieces.Any(p => p.GetPosition().Equals(forward) && p.GetIsAlive()))
-        {
-            moves.Add(forward);
-        }
+        moves.Add(new Cell(position.row + direction, position.column));
         if (isFirstMove)
         {
-            Cell forward2 = new Cell(position.row + 2 * direction, position.column);
-            if (!pieces.Any(p => p.GetPosition().Equals(forward2) && p.GetIsAlive() &&
-                !pieces.Any(p => p.GetPosition().Equals(forward) && p.GetIsAlive())))
-            {
-                moves.Add(forward2);
-            }
+            moves.Add(new Cell(position.row + 2 * direction, position.column));
         }
         moves.Add(new Cell(position.row + direction, (char)(position.column + 1)));
         moves.Add(new Cell(position.row + direction, (char)(position.column - 1)));
         return moves;
-
     }
 
     public bool GetIsAlive() => isAlive;
