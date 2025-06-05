@@ -1,3 +1,4 @@
+using System.Drawing;
 using Chess;
 
 public class GameController
@@ -43,40 +44,56 @@ public class GameController
 
     public bool ValidateMove(IPiece piece, Cell destinationCell)
     {
-    List<Cell> possibleMoves = piece.GetMovePattern();
+        List<Cell> possibleMoves = piece.GetMovePattern();
 
-    // Check if the destination cell is within the possible moves
-    if (!possibleMoves.Contains(destinationCell))
+        // Allow castling move for king
+        if (piece is King king && king.isCanCastling)
+        {
+            int row = king.GetColor() == Color.White ? 1 : 8;
+            if ((destinationCell.column == 'G' || destinationCell.column == 'C') && destinationCell.row == row)
+            {
+                return true;
+            }
+        }
+
+        // Check if the destination cell is within the possible moves
+        if (!possibleMoves.Contains(destinationCell))
+        {
+            System.Console.WriteLine("Invalid piece move.");
+            return false;
+        }
+
+        // Additional condition for pawn diagonal movement
+        if (piece is Pawn pawn)
+        {
+            int rowDiff = Math.Abs(destinationCell.row - piece.GetPosition().row);
+            int colDiff = Math.Abs(destinationCell.column - piece.GetPosition().column);
+
+            // If the pawn moves diagonally, ensure it is capturing an opponent piece
+            if (rowDiff == 1 && colDiff == 1)
+            {
+                IPiece pieceAtDest = pieces.FirstOrDefault(p => p.GetPosition().Equals(destinationCell) && p.GetIsAlive());
+                if (pieceAtDest == null || pieceAtDest.GetColor() == piece.GetColor())
+                {
+                    System.Console.WriteLine("Pion tidak dapat bergerak secara diagonal kecuali menangkap bidak lawan.");
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public bool ValidateChecked(Color color)
     {
-        System.Console.WriteLine("Gerakan bidak tidak valid.");
+        IPiece king = pieces.FirstOrDefault(p => p.GetPieceType() == PieceEnum.King && p.GetColor() == color && p.GetIsAlive());
+        if (king == null) return false;
+
         return false;
     }
 
-    // Additional condition for pawn diagonal movement
-    if (piece is Pawn pawn)
-    {
-        int rowDiff = Math.Abs(destinationCell.row - piece.GetPosition().row);
-        int colDiff = Math.Abs(destinationCell.column - piece.GetPosition().column);
 
-        // If the pawn moves diagonally, ensure it is capturing an opponent piece
-        if (rowDiff == 1 && colDiff == 1)
-        {
-            IPiece pieceAtDest = pieces.FirstOrDefault(p => p.GetPosition().Equals(destinationCell) && p.GetIsAlive());
-            if (pieceAtDest == null || pieceAtDest.GetColor() == piece.GetColor())
-            {
-                System.Console.WriteLine("Pion tidak dapat bergerak secara diagonal kecuali menangkap bidak lawan.");
-                return false;
-            }
-        }
-    }
 
-    return true;
-    }
-
-    // public bool ValidateChecked()
-    // {
-
-    // }
     // public bool ValidateCheckmate()
     // {
 
@@ -86,6 +103,14 @@ public class GameController
 
     public void PieceMove(IPiece pieceToMove, Cell destinationCell)
     {
+        if (pieceToMove is King king)
+        {
+            if (CastlingKing(king, destinationCell))
+            {
+                return;
+            }
+        }
+
         IPiece pieceAtDest = pieces.FirstOrDefault(p => p.GetPosition().Equals(destinationCell) && p.GetIsAlive());
         if (pieceAtDest != null && pieceAtDest.GetColor() == pieceToMove.GetColor())
         {
@@ -100,13 +125,13 @@ public class GameController
         if (pieceToMove is Pawn pawn)
         {
             pawn.isFirstMove = false;
-            if ((pawn.GetColor() == Color.White && destinationCell.row == 7) ||
-                (pawn.GetColor() == Color.Black && destinationCell.row == 0))
+            if ((pawn.GetColor() == Color.White && destinationCell.row == 8) ||
+                (pawn.GetColor() == Color.Black && destinationCell.row == 1))
             {
                 PromotePawn(pawn);
             }
         }
-        if (pieceToMove is King king) king.isCanCastling = false;
+        if (pieceToMove is King k) k.isCanCastling = false;
 
         board.SetBoard(pieces);
     }
@@ -133,6 +158,16 @@ public class GameController
         PieceMove(pieceToMove, toCell);
         System.Console.WriteLine("Langkah berhasil.");
 
+        if (ValidateChecked(players[0].GetColor()))
+        {
+            status = Status.Check;
+            System.Console.WriteLine($"{players[0].GetColor()} is in check!");
+        }
+        else
+        {
+            status = Status.Normal;
+        }
+
         if (players.Count > 1)
         {
             IPlayer movePlayer = players[0];
@@ -153,34 +188,135 @@ public class GameController
 
     public IPiece PromotePawn(Pawn pawn)
     {
-        Queen newQueen = new Queen(true, pawn.GetColor(), pawn.GetPosition(), pawn.GetPieceOrdinal());
+        System.Console.WriteLine("Choose a piece to promote the pawn  (Q for Queen, R for Rook, B for Bishop, N for Knight): ");
+        string choice = Console.ReadLine()?.ToUpper();
+        IPiece promotedPiece;
+        switch (choice)
+        {
+            case "R":
+                promotedPiece = new Rook(true, pawn.GetColor(), pawn.GetPosition(), pawn.GetPieceOrdinal());
+                System.Console.WriteLine($"Pawn promoted to Rook at {pawn.GetPosition().column}{pawn.GetPosition().row}");
+                break;
+            case "B":
+                promotedPiece = new Bishop(true, pawn.GetColor(), pawn.GetPosition(), pawn.GetPieceOrdinal());
+                System.Console.WriteLine($"Pawn promoted to Bishop at {pawn.GetPosition().column}{pawn.GetPosition().row}");
+                break;
+            case "N":
+                promotedPiece = new Knight(true, pawn.GetColor(), pawn.GetPosition(), pawn.GetPieceOrdinal());
+                System.Console.WriteLine($"Pawn promoted to Knight at {pawn.GetPosition().column}{pawn.GetPosition().row}");
+                break;
+            default:
+                promotedPiece = new Queen(true, pawn.GetColor(), pawn.GetPosition(), pawn.GetPieceOrdinal());
+                System.Console.WriteLine($"Pawn promoted to Queen at {pawn.GetPosition().column}{pawn.GetPosition().row}");
+                break;
+        }
+
         if (this.pieces != null)
         {
             int index = this.pieces.IndexOf(pawn);
-            if (index != -1)
+            if (index >= 0)
             {
-                this.pieces[index] = newQueen;
+                this.pieces[index] = promotedPiece;
             }
             else
             {
                 this.pieces.Remove(pawn);
-                this.pieces.Add(newQueen);
+                this.pieces.Add(promotedPiece);
             }
         }
         pawn.SetIsAlive(false);
-        System.Console.WriteLine($"Pion di {newQueen.GetPosition()} dipromosikan menjadi Ratu {newQueen.GetColor()}");
-        return newQueen;
+        return promotedPiece;
     }
 
-    public void EnPassantMove()
+    public void EnPassantMove(Pawn pawn)
     {
+        Cell pawnPos = pawn.GetPosition();
 
+        int direction = pawn.GetColor() == Color.White ? 1 : -1;
+
+        foreach (int colOffset in new int[] { -1, 1 })
+        {
+            char targetCol = (char)(pawnPos.column + colOffset);
+            int targetRow = pawnPos.row;
+
+            IPiece? enemyPawn = pieces.FirstOrDefault(p =>
+                p is Pawn &&
+                p.GetColor() != pawn.GetColor() &&
+                p.GetPosition().column == targetCol &&
+                p.GetPosition().row == targetRow &&
+                ((Pawn)p).isCanEnPassant
+            );
+
+            if (enemyPawn != null)
+            {
+                Cell enPassantDest = new Cell(pawnPos.row + direction, targetCol);
+
+                enemyPawn.SetIsAlive(false);
+
+                pawn.SetPosition(enPassantDest);
+
+                System.Console.WriteLine($"En passant capture at {enPassantDest.column}{enPassantDest.row}!");
+
+                board.SetBoard(pieces);
+                return;
+            }
+        }
     }
 
-    public void CastlingKing()
+
+    public bool CastlingKing(King king, Cell destination) // Change return to boolean and add parameter
     {
+        if (king == null || !king.isCanCastling)
+        {
+            return false;
+        }
+
+        int row = king.GetColor() == Color.White ? 1 : 8;
+
+        // King-side castling
+        if (destination.column == 'G' && destination.row == row)
+        {
+            Rook? rook = pieces.OfType<Rook>().FirstOrDefault(r =>
+                r.GetColor() == king.GetColor() && r.GetPosition().Equals(new Cell(row, 'H')) &&
+                r.GetIsAlive());
+
+            if (rook == null) return false;
+
+            if (pieces.Any(p => p.GetIsAlive() && p.GetPosition().row == row &&
+                p.GetPosition().column == 'F' || p.GetPosition().column == 'G'))
+                return false;
+
+            king.SetPosition(new Cell(row, 'G'));
+            rook.SetPosition(new Cell(row, 'F'));
+            king.isCanCastling = false;
+            board.SetBoard(pieces);
+            return true;
+        }
+
+        // Queen-side castling
+        if (destination.column == 'C' && destination.row == row)
+        {
+            Rook rook = pieces.OfType<Rook>().FirstOrDefault(r =>
+                r.GetColor() == king.GetColor() && r.GetPosition().Equals(new Cell(row, 'A')) &&
+                r.GetIsAlive());
+
+            if (rook == null) return false;
+
+            if (pieces.Any(p => p.GetIsAlive() && p.GetPosition().row == row &&
+                p.GetPosition().column == 'B' || p.GetPosition().column == 'D'))
+                return false;
+
+            king.SetPosition(new Cell(row, 'C'));
+            rook.SetPosition(new Cell(row, 'D'));
+            king.isCanCastling = false;
+            board.SetBoard(pieces);
+            return true;
+        }
+
+        return false;
 
     }
+
     public void StartGame()
     {
         status = Status.Normal;

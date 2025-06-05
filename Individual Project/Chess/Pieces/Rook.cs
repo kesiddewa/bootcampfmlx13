@@ -7,7 +7,6 @@ public class Rook : IPiece
     public PieceEnum piece { get; set; }
     public int ordinal { get; set; }
 
-
     public Rook(bool isAlive, Color color, Cell position, int ordinal)
     {
         this.isAlive = isAlive;
