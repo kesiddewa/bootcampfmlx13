@@ -19,7 +19,7 @@ public class Program
         game.StartGame();
         gameView.RenderView(game.board.board);
 
-        while (game.status == Status.Normal || game.status == Status.Check)
+        while (!game.EndGame())
         {
             Console.WriteLine($"Player turn: {game.players[0].GetColor()}");
             Console.Write("Masukkan langkah (misal: E2 E4), atau 'exit' untuk keluar: ");
@@ -52,6 +52,7 @@ public class Program
                     continue;
                 }
                 game.PlayerMove(fromCell, toCell); // Panggil metode yang dimodifikasi
+
                 gameView.RenderView(game.board.board);
             }
             catch (FormatException)
@@ -63,6 +64,9 @@ public class Program
                 Console.WriteLine($"Terjadi kesalahan: {ex.Message}");
             }
         }
+        Console.WriteLine("Game Over!");
+        Console.WriteLine($"Final Status: {game.status}");
+
     }
     public static void SetupInitialPieces(List<IPiece> pieces)
     {
@@ -105,11 +109,13 @@ public class Program
 
         // En Passant scenario
         // pieces.Add(new Pawn(true, Color.White, new Cell(4, 'D'), 1));
-        // pieces.Add(new Pawn(true, Color.Black, new Cell(5, 'E'), 1));
+        // pieces.Add(new Pawn(true, Color.Black, new Cell(7, 'E'), 1));
 
         // Check scenario
-        // pieces.Add(new Rook(true, Color.White, new Cell(7, 'A'), 1));
-        // pieces.Add(new King(true, Color.White, new Cell(1, 'E'), 1));
-        // pieces.Add(new King(true, Color.Black, new Cell(8, 'E'), 1));
+        pieces.Add(new Pawn(true, Color.Black, new Cell(7, 'G'), 1));
+        pieces.Add(new Rook(true, Color.White, new Cell(7, 'A'), 1));
+        pieces.Add(new Rook(true, Color.White, new Cell(6, 'B'), 1));
+        pieces.Add(new King(true, Color.White, new Cell(1, 'E'), 1));
+        pieces.Add(new King(true, Color.Black, new Cell(8, 'E'), 1));
     }
 }
