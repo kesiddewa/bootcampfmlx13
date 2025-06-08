@@ -4,70 +4,80 @@ public class Program
 {
     static void Main(string[] args)
     {
-        List<IPlayer> gamePlayers = new List<IPlayer>
+        bool playAgain = true;
+
+        while (playAgain)
         {
-            new Player(Color.White, Status.Normal),
-            new Player(Color.Black, Status.Normal)
-        };
-        IBoard board = new Board(8, 8);
-        List<IPiece> gamePieces = new List<IPiece>();
-        SetupInitialPieces(gamePieces);
-        GameController game = new GameController(gamePlayers, gamePieces, board);
-
-
-        View gameView = new View();
-        game.StartGame();
-        gameView.RenderView(game.board.board);
-
-        while (!game.EndGame())
-        {
-            Console.WriteLine($"Player turn: {game.players[0].GetColor()}");
-            Console.Write("Masukkan langkah (misal: E2 E4), atau 'exit' untuk keluar: ");
-            string input = Console.ReadLine();
-
-            if (input.ToLower() == "exit")
+            List<IPlayer> gamePlayers = new List<IPlayer>
             {
-                Console.WriteLine("Keluar dari permainan.");
-                break;
-            }
+                new Player(Color.White, Status.Normal),
+                new Player(Color.Black, Status.Normal)
+            };
+            IBoard board = new Board(8, 8);
+            List<IPiece> gamePieces = new List<IPiece>();
+            SetupInitialPieces(gamePieces);
+            GameController game = new GameController(gamePlayers, gamePieces, board);
 
-            string[] parts = input.ToUpper().Split(' ');
-            if (parts.Length != 2 || parts[0].Length != 2 || parts[1].Length != 2)
+            View gameView = new View();
+            game.StartGame();
+            gameView.RenderView(game.board.board);
+
+            while (!game.EndGame())
             {
-                gameView.RenderView(game.board.board);
-                Console.WriteLine("Format input tidak valid. Contoh: e2 e4");
-                continue;
-            }
+                Console.WriteLine($"Player turn: {game.players[0].GetColor()}");
+                Console.Write("Enter your move (e.g., E2 E4) or type 'exit' to quit: ");
+                string input = Console.ReadLine();
 
-            try
-            {
-                Cell fromCell = new Cell(int.Parse(parts[0][1].ToString()), parts[0][0]);
-                Cell toCell = new Cell(int.Parse(parts[1][1].ToString()), parts[1][0]);
-
-                // Validasi input sel dasar
-                if (fromCell.column < 'A' || fromCell.column > 'H' || fromCell.row < 1 || fromCell.row > 8 ||
-                    toCell.column < 'A' || toCell.column > 'H' || toCell.row < 1 || toCell.row > 8)
+                if (input.ToLower() == "exit")
                 {
-                    Console.WriteLine("Koordinat sel tidak valid.");
+                    Console.WriteLine("Quitting the game...");
+                    break;
+                }
+
+                string[] parts = input.ToUpper().Split(' ');
+                if (parts.Length != 2 || parts[0].Length != 2 || parts[1].Length != 2)
+                {
+                    gameView.RenderView(game.board.board);
+                    Console.WriteLine("Invalid input format. Must be in the format 'E2 E4'.");
                     continue;
                 }
-                game.PlayerMove(fromCell, toCell); // Panggil metode yang dimodifikasi
 
-                gameView.RenderView(game.board.board);
+                try
+                {
+                    Cell fromCell = new Cell(int.Parse(parts[0][1].ToString()), parts[0][0]);
+                    Cell toCell = new Cell(int.Parse(parts[1][1].ToString()), parts[1][0]);
+
+                    if (fromCell.column < 'A' || fromCell.column > 'H' || fromCell.row < 1 || fromCell.row > 8 ||
+                        toCell.column < 'A' || toCell.column > 'H' || toCell.row < 1 || toCell.row > 8)
+                    {
+                        Console.WriteLine("Invalid cell coordinates. Must be between A1 and H8.");
+                        continue;
+                    }
+                    game.PlayerMove(fromCell, toCell);
+
+                    gameView.RenderView(game.board.board);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("The row format in the cell input is invalid (must be a number).");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred: {ex.Message}");
+                }
             }
-            catch (FormatException)
-            {
-                Console.WriteLine("Format baris pada input sel tidak valid (harus angka).");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Terjadi kesalahan: {ex.Message}");
-            }
+
+            Console.WriteLine("Game Over!");
+            Console.WriteLine($"Final Status: {game.status}");
+
+            Console.Write("Do you want to play again? (y/n): ");
+            string playAgainInput = Console.ReadLine().ToLower();
+            playAgain = playAgainInput == "y";
         }
-        Console.WriteLine("Game Over!");
-        Console.WriteLine($"Final Status: {game.status}");
 
+        Console.WriteLine("Thank you for playing!");
     }
+
     public static void SetupInitialPieces(List<IPiece> pieces)
     {
         // Default chess pieces setup
@@ -111,7 +121,7 @@ public class Program
         // pieces.Add(new Pawn(true, Color.White, new Cell(4, 'D'), 1));
         // pieces.Add(new Pawn(true, Color.Black, new Cell(7, 'E'), 1));
 
-        // Check scenario
+        // Check & Checkmate scenario
         pieces.Add(new Pawn(true, Color.Black, new Cell(7, 'G'), 1));
         pieces.Add(new Rook(true, Color.White, new Cell(7, 'A'), 1));
         pieces.Add(new Rook(true, Color.White, new Cell(6, 'B'), 1));

@@ -2,6 +2,5 @@ public enum Status
 {
     Normal,
     Check,
-    Checkmate,
-    Stalemate
+    Checkmate
 }

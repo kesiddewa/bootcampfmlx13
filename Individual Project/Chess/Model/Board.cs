@@ -41,10 +41,10 @@ public class Board : IBoard
 
             switch (pieceColor)
             {
-                case Color.White: // Menggunakan PieceColor
+                case Color.White:
                     switch (pieceType)
                     {
-                        case PieceEnum.King: unicodePieceChar = "♔"; break; // Menggunakan PieceType
+                        case PieceEnum.King: unicodePieceChar = "♔"; break;
                         case PieceEnum.Queen: unicodePieceChar = "♕"; break;
                         case PieceEnum.Rook: unicodePieceChar = "♖"; break;
                         case PieceEnum.Bishop: unicodePieceChar = "♗"; break;
@@ -52,10 +52,10 @@ public class Board : IBoard
                         case PieceEnum.Pawn: unicodePieceChar = "♙"; break;
                     }
                     break;
-                case Color.Black: // Menggunakan PieceColor
+                case Color.Black:
                     switch (pieceType)
                     {
-                        case PieceEnum.King: unicodePieceChar = "♚"; break; // Menggunakan PieceType
+                        case PieceEnum.King: unicodePieceChar = "♚"; break;
                         case PieceEnum.Queen: unicodePieceChar = "♛"; break;
                         case PieceEnum.Rook: unicodePieceChar = "♜"; break;
                         case PieceEnum.Bishop: unicodePieceChar = "♝"; break;
