@@ -7,7 +7,7 @@ public class View
     {
         if (board == null)
         {
-            Console.WriteLine("Data papan permainan kosong.");
+            Console.WriteLine("Board data is empty.");
             return;
         }
 
