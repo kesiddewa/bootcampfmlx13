@@ -32,6 +32,7 @@ public class GameController
 
     public bool ValidateDestination(IPiece piece, Cell destinationCell)
     {
+        // Checks if the destination cell is either empty or occupied by an opponent's piece.
         IPiece? pieceAtDest = pieces.FirstOrDefault(p => p.GetPosition().Equals(destinationCell) && p.GetIsAlive());
         if (pieceAtDest != null && pieceAtDest.GetColor() == piece.GetColor())
         {
@@ -44,6 +45,7 @@ public class GameController
     {
         List<Cell> possibleMoves = piece.GetMovePattern();
 
+        // Check if king is eligible for castling
         if (piece is King king && king.isCanCastling)
         {
             int row = king.GetColor() == Color.White ? 1 : 8;
@@ -147,6 +149,7 @@ public class GameController
                 continue;
             }
 
+            // Check if any opponent piece can attack the king
             if (opponentMoves.Contains(king.GetPosition()))
             {
                 if (opponentPiece is Rook || opponentPiece is Bishop || opponentPiece is Queen)
@@ -239,7 +242,6 @@ public class GameController
                     possibleMoves.Add(destinationCell);
                     involvedPieces.Add(piece);
     
-                    // 4. Jika langkah memungkinkan, simulasikan untuk melihat apakah itu menyelamatkan Raja.
                     Cell originalPosition = piece.GetPosition();
                     IPiece? pieceAtDest = pieces.FirstOrDefault(p => p.GetPosition().Equals(destinationCell) && p.GetIsAlive());
                     bool destPieceWasAlive = pieceAtDest?.GetIsAlive() ?? false;
@@ -428,11 +430,13 @@ public class GameController
         if (destination.row != pawn.GetPosition().row + direction || Math.Abs(destination.column - pawn.GetPosition().column) != 1) return false;
         if (pieces.Any(p => p.GetPosition().Equals(destination) && p.GetIsAlive())) return false;
 
+        // The captured pawn must be adjacent and eligible for en passant
         Cell capturedPawnCell = new Cell(pawn.GetPosition().row, destination.column);
         IPiece? capturedPawn = pieces.FirstOrDefault(p => p.GetPosition().Equals(capturedPawnCell) && p is Pawn && ((Pawn)p).isCanEnPassant && p.GetColor() != pawn.GetColor());
 
         if (capturedPawn == null) return false;
 
+        // Perform en passant
         capturedPawn.SetIsAlive(false);
         pawn.SetPosition(destination);
         pawn.isFirstMove = false;

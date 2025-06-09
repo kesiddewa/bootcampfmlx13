@@ -73,10 +73,6 @@ public class Board : IBoard
             {
                 board[arrayRow, arrayCol] = unicodePieceChar;
             }
-            else
-            {
-                Console.WriteLine($"Peringatan: Bidak {pieceType} {pieceColor} berada di posisi tidak valid ({pos.row},{pos.column})");
-            }
         }
     }
 }

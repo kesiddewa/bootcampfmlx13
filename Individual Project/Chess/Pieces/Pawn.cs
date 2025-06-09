@@ -27,12 +27,20 @@ public class Pawn : IPiece
     {
         var moves = new List<Cell>();
         int direction = color == Color.White ? 1 : -1;
+
+        // forward one square
         moves.Add(new Cell(position.row + direction, position.column));
+
+        // Forward two squares on first move
         if (isFirstMove)
         {
             moves.Add(new Cell(position.row + 2 * direction, position.column));
         }
+
+        // Diagonal right
         moves.Add(new Cell(position.row + direction, (char)(position.column + 1)));
+
+        // Diagonal left
         moves.Add(new Cell(position.row + direction, (char)(position.column - 1)));
         return moves;
     }

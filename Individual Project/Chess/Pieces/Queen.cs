@@ -21,6 +21,7 @@ public class Queen : IPiece
     {
         var moves = new List<Cell>();
         for(int i = 0; i < 8; i++){
+            
             // Horizontal and Vertical Moves
             moves.Add(new Cell(position.row + i, position.column)); // Down
             moves.Add(new Cell(position.row - i, position.column)); // Up
