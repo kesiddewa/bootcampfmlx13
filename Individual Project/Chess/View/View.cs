@@ -1,4 +1,5 @@
 using System.Text;
+using Chess;
 
 public class View
 {
@@ -107,5 +108,60 @@ public class View
             Console.Write($" {(char)('A' + j)} ".PadRight(cellWidth + 1));
         }
         Console.WriteLine("\n");
+    }
+
+    public void ShowNoPieceAtPosition()
+    {
+        Console.WriteLine("There is no piece at that position.");
+    }
+
+    public void ShowNotYourPiece()
+    {
+        Console.WriteLine("The pawn you selected doesn't belong to you.");
+    }
+
+    public void ShowInvalidPieceMove()
+    {
+        Console.WriteLine("Invalid piece move.");
+    }
+
+    public void ShowKingInCheck()
+    {
+        Console.WriteLine("Invalid piece move: this move puts your king in check.");
+    }
+
+    public void ShowCapturedPiece(string pieceType, Color color)
+    {
+        Console.WriteLine($"{pieceType} {color} player's captured!");
+    }
+
+    public void ShowMoveSuccess()
+    {
+        Console.WriteLine("Move successful!");
+    }
+
+    public void ShowCheckmate(Color winner)
+    {
+        Console.WriteLine($"CHECKMATE! {winner} player win!");
+    }
+
+    public void ShowCheck(Color color)
+    {
+        Console.WriteLine($"CHECK! {color} player's king is in danger!");
+    }
+
+    public void ShowPawnPromotionChoice()
+    {
+        Console.WriteLine("Choose a piece to promote your pawn to ((R) for Rook, (B) for Bishop, (N) for Knight, (Q) for Queen): ");
+    }
+
+    public void ShowPawnPromoted(string pieceType, ICell position)
+    {
+        Console.WriteLine($"Pawn promoted to {pieceType} at {position.column}{position.row}");
+    }
+
+    public void ShowEnPassantSuccess()
+    {
+        Console.WriteLine("En Passant success!");
     }
 }

@@ -2,35 +2,37 @@ using Chess;
 
 public class GameController
 {
-    public Status status { get; set; }
-    public List<IPlayer> players { get; set; }
-    public List<IPiece> pieces { get; set; }
-    public IBoard board { get; set; }
-    Action<List<Cell>, List<IPiece>>? ScanCheckmate;
-    public GameController(List<IPlayer> player, List<IPiece> pieces, IBoard board)
+    public Status status;
+    public List<IPlayer> players;
+    public List<IPiece> pieces;
+    public IBoard board;
+    public View view;
+    Action<List<ICell>, List<IPiece>>? scanCheckmate;
+    public GameController(List<IPlayer> player, List<IPiece> pieces, IBoard board, View view)
     {
         players = player;
         this.pieces = pieces;
         this.board = board;
+        this.view = view;
         status = Status.Normal;
     }
-    public bool ValidatePiece(Cell pieceCell)
+    public bool ValidatePiece(ICell pieceCell)
     {
         IPiece? selectPiece = pieces.FirstOrDefault(p => p.GetPosition().Equals(pieceCell) && p.GetIsAlive());
         if (selectPiece == null)
         {
-            System.Console.WriteLine("There is no piece at that position.");
+            view.ShowNoPieceAtPosition();
             return false;
         }
         if (selectPiece.GetColor() != players[0].GetColor())
         {
-            System.Console.WriteLine("The pawn you selected doesn't belong to you.");
+            view.ShowNotYourPiece();
             return false;
         }
         return true;
     }
 
-    public bool ValidateDestination(IPiece piece, Cell destinationCell)
+    public bool IsValidDestination(IPiece piece, ICell destinationCell)
     {
         // Checks if the destination cell is either empty or occupied by an opponent's piece.
         IPiece? pieceAtDest = pieces.FirstOrDefault(p => p.GetPosition().Equals(destinationCell) && p.GetIsAlive());
@@ -41,9 +43,9 @@ public class GameController
         return true;
     }
 
-    public bool ValidateMove(IPiece piece, Cell destinationCell)
+    public bool IsMoveLegal(IPiece piece, ICell destinationCell)
     {
-        List<Cell> possibleMoves = piece.GetMovePattern();
+        List<ICell> possibleMoves = piece.GetMovePattern();
 
         // Check if king is eligible for castling
         if (piece is King king && king.isCanCastling)
@@ -57,14 +59,14 @@ public class GameController
 
         if (!possibleMoves.Contains(destinationCell))
         {
-            System.Console.WriteLine("Invalid piece move.");
+            view.ShowInvalidPieceMove();
             return false;
         }
 
         // Logic for Pawn movement
         if (piece is Pawn pawn)
         {
-            Cell currentPos = pawn.GetPosition();
+            ICell currentPos = pawn.GetPosition();
             int direction = pawn.GetColor() == Color.White ? 1 : -1;
             IPiece? pieceAtDest = pieces.FirstOrDefault(p => p.GetPosition().Equals(destinationCell) && p.GetIsAlive());
 
@@ -76,7 +78,7 @@ public class GameController
             // 2 square forward (first move only)
             else if (pawn.isFirstMove && destinationCell.row == currentPos.row + (2 * direction) && destinationCell.column == currentPos.column)
             {
-                Cell pathCell = new Cell(currentPos.row + direction, currentPos.column);
+                ICell pathCell = new Cell(currentPos.row + direction, currentPos.column);
                 if (pieceAtDest != null || pieces.Any(p => p.GetPosition().Equals(pathCell) && p.GetIsAlive())) return false; // Dihalangi
             }
             // Diagonal capture
@@ -85,7 +87,7 @@ public class GameController
                 // En passant
                 if (pieceAtDest == null)
                 {
-                    Cell adjacentCell = new Cell(currentPos.row, destinationCell.column);
+                    ICell adjacentCell = new Cell(currentPos.row, destinationCell.column);
                     IPiece? enPassantTarget = pieces.FirstOrDefault(p => p.GetPosition().Equals(adjacentCell) && 
                         p.GetIsAlive() && p is Pawn && p.GetColor() != pawn.GetColor());
                     if (enPassantTarget == null || !((Pawn)enPassantTarget).isCanEnPassant) return false; // Bukan en passant valid
@@ -99,7 +101,7 @@ public class GameController
 
         // Simulate the move to check if the King will be in check
         IPiece? originalPieceAtDest = pieces.FirstOrDefault(p => p.GetPosition().Equals(destinationCell) && p.GetIsAlive());
-        Cell originalPosition = piece.GetPosition();
+        ICell originalPosition = piece.GetPosition();
 
         piece.SetPosition(destinationCell);
         if (originalPieceAtDest != null)
@@ -117,7 +119,7 @@ public class GameController
 
         if (isKingInCheck)
         {
-            System.Console.WriteLine("Invalid piece move: this move puts your king in check.");
+            view.ShowKingInCheck();
             return false;
         }
 
@@ -133,13 +135,13 @@ public class GameController
         // Check if the king is under attack by any opponent piece
         foreach (var opponentPiece in pieces.Where(p => p.GetColor() != color && p.GetIsAlive()))
         {
-            List<Cell> opponentMoves = opponentPiece.GetMovePattern();
+            List<ICell> opponentMoves = opponentPiece.GetMovePattern();
 
             // Exception for pawns: their movement pattern differs from their attack pattern
             if (opponentPiece is Pawn pawn)
             {
                 int direction = pawn.GetColor() == Color.White ? 1 : -1;
-                Cell pos = pawn.GetPosition();
+                ICell pos = pawn.GetPosition();
 
                 if ((king.GetPosition().row == pos.row + direction && king.GetPosition().column == pos.column + 1) ||
                     (king.GetPosition().row == pos.row + direction && king.GetPosition().column == pos.column - 1))
@@ -156,7 +158,7 @@ public class GameController
                 {
                     int rowStep = Math.Sign(king.GetPosition().row - opponentPiece.GetPosition().row);
                     int colStep = Math.Sign(king.GetPosition().column - opponentPiece.GetPosition().column);
-                    Cell currentPathCell = new Cell(opponentPiece.GetPosition().row + rowStep, (char)(opponentPiece.GetPosition().column + colStep));
+                    ICell currentPathCell = new Cell(opponentPiece.GetPosition().row + rowStep, (char)(opponentPiece.GetPosition().column + colStep));
                     bool pathIsClear = true;
                     while (!currentPathCell.Equals(king.GetPosition()))
                     {
@@ -187,7 +189,7 @@ public class GameController
             return false;
         }
     
-        List<Cell> possibleMoves = new List<Cell>();
+        List<ICell> possibleMoves = new List<ICell>();
         List<IPiece> involvedPieces = new List<IPiece>();
     
         // Iterate through all pieces belonging to the current player.
@@ -197,9 +199,9 @@ public class GameController
             {
                 for (int r = 1; r <= 8; r++)
                 {
-                    Cell destinationCell = new Cell(r, c);
+                    ICell destinationCell = new Cell(r, c);
     
-                    if (!ValidateDestination(piece, destinationCell)) continue;
+                    if (!IsValidDestination(piece, destinationCell)) continue;
     
                     // Perform full move validation (including obstacle checks and special rules)
                     bool isMoveTheoreticallyPossible = false;
@@ -221,7 +223,7 @@ public class GameController
                             // Check if the path is clear for Rook, Bishop, or Queen
                             int rowStep = Math.Sign(destinationCell.row - piece.GetPosition().row);
                             int colStep = Math.Sign(destinationCell.column - piece.GetPosition().column);
-                            Cell path = new Cell(piece.GetPosition().row + rowStep, (char)(piece.GetPosition().column + colStep));
+                            ICell path = new Cell(piece.GetPosition().row + rowStep, (char)(piece.GetPosition().column + colStep));
                             bool blocked = false;
                             while (!path.Equals(destinationCell))
                             {
@@ -242,7 +244,7 @@ public class GameController
                     possibleMoves.Add(destinationCell);
                     involvedPieces.Add(piece);
     
-                    Cell originalPosition = piece.GetPosition();
+                    ICell originalPosition = piece.GetPosition();
                     IPiece? pieceAtDest = pieces.FirstOrDefault(p => p.GetPosition().Equals(destinationCell) && p.GetIsAlive());
                     bool destPieceWasAlive = pieceAtDest?.GetIsAlive() ?? false;
     
@@ -263,12 +265,12 @@ public class GameController
         }
     
         // Invoke the ScanCheckmate action if it's not null
-        ScanCheckmate?.Invoke(possibleMoves, involvedPieces);
+        scanCheckmate?.Invoke(possibleMoves, involvedPieces);
     
         return true;
     }
 
-    public void PieceMove(IPiece pieceToMove, Cell destinationCell)
+    public void PieceMove(IPiece pieceToMove, ICell destinationCell)
     {
 
         if (pieceToMove is King king)
@@ -307,7 +309,7 @@ public class GameController
         if (pieceAtDest != null && pieceAtDest.GetColor() != pieceToMove.GetColor())
         {
             pieceAtDest.SetIsAlive(false);
-            System.Console.WriteLine($"{pieceAtDest.GetPieceType()} {pieceAtDest.GetColor()} player's captured!");
+            view.ShowCapturedPiece(pieceAtDest.GetPieceType().ToString(), pieceAtDest.GetColor());
         }
 
         pieceToMove.SetPosition(destinationCell);
@@ -326,7 +328,7 @@ public class GameController
         board.SetBoard(pieces);
     }
 
-    public void PlayerMove(Cell fromCell, Cell toCell)
+    public void PlayerMove(ICell fromCell, ICell toCell)
     {
         if (!ValidatePiece(fromCell))
         {
@@ -335,13 +337,13 @@ public class GameController
 
         IPiece pieceToMove = pieces.First(p => p.GetPosition().Equals(fromCell) && p.GetIsAlive());
 
-        if (!ValidateDestination(pieceToMove, toCell) || !ValidateMove(pieceToMove, toCell))
+        if (!IsValidDestination(pieceToMove, toCell) || !IsMoveLegal(pieceToMove, toCell))
         {
             return;
         }
 
         PieceMove(pieceToMove, toCell);
-        System.Console.WriteLine("Move successful!");
+        view.ShowMoveSuccess();
 
         // After moving, check the opponent's status
         IPlayer opponentPlayer = players[1];
@@ -355,13 +357,13 @@ public class GameController
             {
                 status = Status.Checkmate;
                 opponentPlayer.SetStatus(Status.Checkmate);
-                System.Console.WriteLine($"CHECKMATE! {currentPlayer.GetColor()} player win!");
+                view.ShowCheckmate(currentPlayer.GetColor());
             }
             else
             {
                 status = Status.Check;
                 opponentPlayer.SetStatus(Status.Check);
-                System.Console.WriteLine($"CHECK! {opponentPlayer.GetColor()} player's king is in danger!");
+                view.ShowCheck(currentPlayer.GetColor());
             }
 
             players[0] = currentPlayer;
@@ -384,26 +386,26 @@ public class GameController
 
     public IPiece PromotePawn(Pawn pawn)
     {
-        System.Console.WriteLine("Choose a piece to promote your pawn to ((R) for Rook, (B) for Bishop, (N) for Knight, (Q) for Queen): ");
+        view.ShowPawnPromotionChoice();
         string? choice = Console.ReadLine()?.ToUpper();
         IPiece promotedPiece;
         switch (choice)
         {
             case "R":
                 promotedPiece = new Rook(true, pawn.GetColor(), pawn.GetPosition(), pawn.GetPieceOrdinal());
-                System.Console.WriteLine($"Pawn promoted to Rook at {pawn.GetPosition().column}{pawn.GetPosition().row}");
+                view.ShowPawnPromoted(promotedPiece.GetPieceType().ToString(), promotedPiece.GetPosition());
                 break;
             case "B":
                 promotedPiece = new Bishop(true, pawn.GetColor(), pawn.GetPosition(), pawn.GetPieceOrdinal());
-                System.Console.WriteLine($"Pawn promoted to Bishop at {pawn.GetPosition().column}{pawn.GetPosition().row}");
+                view.ShowPawnPromoted(promotedPiece.GetPieceType().ToString(), promotedPiece.GetPosition());
                 break;
             case "N":
                 promotedPiece = new Knight(true, pawn.GetColor(), pawn.GetPosition(), pawn.GetPieceOrdinal());
-                System.Console.WriteLine($"Pawn promoted to Knight at {pawn.GetPosition().column}{pawn.GetPosition().row}");
+                view.ShowPawnPromoted(promotedPiece.GetPieceType().ToString(), promotedPiece.GetPosition());
                 break;
             default:
                 promotedPiece = new Queen(true, pawn.GetColor(), pawn.GetPosition(), pawn.GetPieceOrdinal());
-                System.Console.WriteLine($"Pawn promoted to Queen at {pawn.GetPosition().column}{pawn.GetPosition().row}");
+                view.ShowPawnPromoted(promotedPiece.GetPieceType().ToString(), promotedPiece.GetPosition());
                 break;
         }
 
@@ -414,14 +416,14 @@ public class GameController
         return promotedPiece;
     }
 
-    public bool EnPassantMove(Pawn pawn, Cell destination)
+    public bool EnPassantMove(Pawn pawn, ICell destination)
     {
         int direction = pawn.GetColor() == Color.White ? 1 : -1;
         if (destination.row != pawn.GetPosition().row + direction || Math.Abs(destination.column - pawn.GetPosition().column) != 1) return false;
         if (pieces.Any(p => p.GetPosition().Equals(destination) && p.GetIsAlive())) return false;
 
         // The captured pawn must be adjacent and eligible for en passant
-        Cell capturedPawnCell = new Cell(pawn.GetPosition().row, destination.column);
+        ICell capturedPawnCell = new Cell(pawn.GetPosition().row, destination.column);
         IPiece? capturedPawn = pieces.FirstOrDefault(p => p.GetPosition().Equals(capturedPawnCell) && p is Pawn && ((Pawn)p).isCanEnPassant && p.GetColor() != pawn.GetColor());
 
         if (capturedPawn == null) return false;
@@ -430,11 +432,11 @@ public class GameController
         capturedPawn.SetIsAlive(false);
         pawn.SetPosition(destination);
         pawn.isFirstMove = false;
-        System.Console.WriteLine("En Passant success!");
+        view.ShowEnPassantSuccess();
         return true;
     }
 
-    public bool CastlingKing(King king, Cell destination)
+    public bool CastlingKing(King king, ICell destination)
     {
         if (king == null || !king.isCanCastling)
         {
@@ -483,6 +485,31 @@ public class GameController
             return true;
         }
         return false;
+    }
+
+    public void SetupInitialPieces(List<IPiece> pieces)
+    {
+        pieces.Add(new Rook(true, Color.White, new Cell(1, 'A'), 1));
+        pieces.Add(new Knight(true, Color.White, new Cell(1, 'B'), 1));
+        pieces.Add(new Bishop(true, Color.White, new Cell(1, 'C'), 1));
+        pieces.Add(new Queen(true, Color.White, new Cell(1, 'D'), 1));
+        pieces.Add(new King(true, Color.White, new Cell(1, 'E'), 1));
+        pieces.Add(new Bishop(true, Color.White, new Cell(1, 'F'), 2));
+        pieces.Add(new Knight(true, Color.White, new Cell(1, 'G'), 2));
+        pieces.Add(new Rook(true, Color.White, new Cell(1, 'H'), 2));
+        for (char c = 'A'; c <= 'H'; c++)
+            pieces.Add(new Pawn(true, Color.White, new Cell(2, c), c - 'A' + 1));
+
+        pieces.Add(new Rook(true, Color.Black, new Cell(8, 'A'), 1));
+        pieces.Add(new Knight(true, Color.Black, new Cell(8, 'B'), 1));
+        pieces.Add(new Bishop(true, Color.Black, new Cell(8, 'C'), 1));
+        pieces.Add(new Queen(true, Color.Black, new Cell(8, 'D'), 1));
+        pieces.Add(new King(true, Color.Black, new Cell(8, 'E'), 1));
+        pieces.Add(new Bishop(true, Color.Black, new Cell(8, 'F'), 2));
+        pieces.Add(new Knight(true, Color.Black, new Cell(8, 'G'), 2));
+        pieces.Add(new Rook(true, Color.Black, new Cell(8, 'H'), 2));
+        for (char c = 'A'; c <= 'H'; c++)
+            pieces.Add(new Pawn(true, Color.Black, new Cell(7, c), c - 'A' + 1));
     }
 
     public void StartGame()

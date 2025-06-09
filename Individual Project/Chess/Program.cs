@@ -15,10 +15,10 @@ public class Program
             };
             IBoard board = new Board(8, 8);
             List<IPiece> gamePieces = new List<IPiece>();
-            SetupInitialPieces(gamePieces);
-            GameController game = new GameController(gamePlayers, gamePieces, board);
-
             View gameView = new View();
+            GameController game = new GameController(gamePlayers, gamePieces, board, gameView);
+            game.SetupInitialPieces(gamePieces);
+
             game.StartGame();
             gameView.RenderView(game.board.board);
 
@@ -42,29 +42,19 @@ public class Program
                     continue;
                 }
 
-                try
-                {
-                    Cell fromCell = new Cell(int.Parse(parts[0][1].ToString()), parts[0][0]);
-                    Cell toCell = new Cell(int.Parse(parts[1][1].ToString()), parts[1][0]);
+                ICell fromCell = new Cell(int.Parse(parts[0][1].ToString()), parts[0][0]);
+                ICell toCell = new Cell(int.Parse(parts[1][1].ToString()), parts[1][0]);
 
-                    if (fromCell.column < 'A' || fromCell.column > 'H' || fromCell.row < 1 || fromCell.row > 8 ||
-                        toCell.column < 'A' || toCell.column > 'H' || toCell.row < 1 || toCell.row > 8)
-                    {
-                        Console.WriteLine("Invalid cell coordinates. Must be between A1 and H8.");
-                        continue;
-                    }
-                    game.PlayerMove(fromCell, toCell);
+                if (fromCell.column < 'A' || fromCell.column > 'H' || fromCell.row < 1 || fromCell.row > 8 ||
+                    toCell.column < 'A' || toCell.column > 'H' || toCell.row < 1 || toCell.row > 8)
+                {
+                    Console.WriteLine("Invalid cell coordinates. Must be between A1 and H8.");
+                    continue;
+                }
+                game.PlayerMove(fromCell, toCell);
 
-                    gameView.RenderView(game.board.board);
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine("The row format in the cell input is invalid (must be a number).");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"An error occurred: {ex.Message}");
-                }
+                gameView.RenderView(game.board.board);
+
             }
 
             Console.WriteLine("Game Over!");
@@ -76,56 +66,5 @@ public class Program
         }
 
         Console.WriteLine("Thank you for playing!");
-    }
-
-    public static void SetupInitialPieces(List<IPiece> pieces)
-    {
-        // Default chess pieces setup
-        pieces.Add(new Rook(true, Color.White, new Cell(1, 'A'), 1));
-        pieces.Add(new Knight(true, Color.White, new Cell(1, 'B'), 1));
-        pieces.Add(new Bishop(true, Color.White, new Cell(1, 'C'), 1));
-        pieces.Add(new Queen(true, Color.White, new Cell(1, 'D'), 1));
-        pieces.Add(new King(true, Color.White, new Cell(1, 'E'), 1));
-        pieces.Add(new Bishop(true, Color.White, new Cell(1, 'F'), 2));
-        pieces.Add(new Knight(true, Color.White, new Cell(1, 'G'), 2));
-        pieces.Add(new Rook(true, Color.White, new Cell(1, 'H'), 2));
-        for (char c = 'A'; c <= 'H'; c++)
-            pieces.Add(new Pawn(true, Color.White, new Cell(2, c), c - 'A' + 1));
-
-        pieces.Add(new Rook(true, Color.Black, new Cell(8, 'A'), 1));
-        pieces.Add(new Knight(true, Color.Black, new Cell(8, 'B'), 1));
-        pieces.Add(new Bishop(true, Color.Black, new Cell(8, 'C'), 1));
-        pieces.Add(new Queen(true, Color.Black, new Cell(8, 'D'), 1));
-        pieces.Add(new King(true, Color.Black, new Cell(8, 'E'), 1));
-        pieces.Add(new Bishop(true, Color.Black, new Cell(8, 'F'), 2));
-        pieces.Add(new Knight(true, Color.Black, new Cell(8, 'G'), 2));
-        pieces.Add(new Rook(true, Color.Black, new Cell(8, 'H'), 2));
-        for (char c = 'A'; c <= 'H'; c++)
-            pieces.Add(new Pawn(true, Color.Black, new Cell(7, c), c - 'A' + 1));
-
-
-
-        // Custom pieces setup for testing
-
-        // Promote pawn scenario
-        // pieces.Add(new Pawn(true, Color.White, new Cell(7, 'A'), 1));
-        // pieces.Add(new Pawn(true, Color.Black, new Cell(7, 'H'), 1));
-
-        // Castling scenario
-        // pieces.Add(new King(true, Color.Black, new Cell(8, 'E'), 1));
-        // pieces.Add(new Rook(true, Color.Black, new Cell(8, 'H'), 2));
-        // pieces.Add(new King(true, Color.White, new Cell(1, 'E'), 1));
-        // pieces.Add(new Rook(true, Color.White, new Cell(1, 'A'), 1));
-
-        // En Passant scenario
-        // pieces.Add(new Pawn(true, Color.White, new Cell(4, 'D'), 1));
-        // pieces.Add(new Pawn(true, Color.Black, new Cell(7, 'E'), 1));
-
-        // Check & Checkmate scenario
-        // pieces.Add(new Pawn(true, Color.Black, new Cell(7, 'G'), 1));
-        // pieces.Add(new Rook(true, Color.White, new Cell(7, 'A'), 1));
-        // pieces.Add(new Rook(true, Color.White, new Cell(6, 'B'), 1));
-        // pieces.Add(new King(true, Color.White, new Cell(1, 'E'), 1));
-        // pieces.Add(new King(true, Color.Black, new Cell(8, 'E'), 1));
     }
 }
