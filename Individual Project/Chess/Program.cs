@@ -81,27 +81,27 @@ public class Program
     public static void SetupInitialPieces(List<IPiece> pieces)
     {
         // Default chess pieces setup
-        // pieces.Add(new Rook(true, Color.White, new Cell(1, 'A'), 1));
-        // pieces.Add(new Knight(true, Color.White, new Cell(1, 'B'), 1));
-        // pieces.Add(new Bishop(true, Color.White, new Cell(1, 'C'), 1));
-        // pieces.Add(new Queen(true, Color.White, new Cell(1, 'D'), 1));
-        // pieces.Add(new King(true, Color.White, new Cell(1, 'E'), 1));
-        // pieces.Add(new Bishop(true, Color.White, new Cell(1, 'F'), 2));
-        // pieces.Add(new Knight(true, Color.White, new Cell(1, 'G'), 2));
-        // pieces.Add(new Rook(true, Color.White, new Cell(1, 'H'), 2));
-        // for (char c = 'A'; c <= 'H'; c++)
-        //     pieces.Add(new Pawn(true, Color.White, new Cell(2, c), c - 'A' + 1));
+        pieces.Add(new Rook(true, Color.White, new Cell(1, 'A'), 1));
+        pieces.Add(new Knight(true, Color.White, new Cell(1, 'B'), 1));
+        pieces.Add(new Bishop(true, Color.White, new Cell(1, 'C'), 1));
+        pieces.Add(new Queen(true, Color.White, new Cell(1, 'D'), 1));
+        pieces.Add(new King(true, Color.White, new Cell(1, 'E'), 1));
+        pieces.Add(new Bishop(true, Color.White, new Cell(1, 'F'), 2));
+        pieces.Add(new Knight(true, Color.White, new Cell(1, 'G'), 2));
+        pieces.Add(new Rook(true, Color.White, new Cell(1, 'H'), 2));
+        for (char c = 'A'; c <= 'H'; c++)
+            pieces.Add(new Pawn(true, Color.White, new Cell(2, c), c - 'A' + 1));
 
-        // pieces.Add(new Rook(true, Color.Black, new Cell(8, 'A'), 1));
-        // pieces.Add(new Knight(true, Color.Black, new Cell(8, 'B'), 1));
-        // pieces.Add(new Bishop(true, Color.Black, new Cell(8, 'C'), 1));
-        // pieces.Add(new Queen(true, Color.Black, new Cell(8, 'D'), 1));
-        // pieces.Add(new King(true, Color.Black, new Cell(8, 'E'), 1));
-        // pieces.Add(new Bishop(true, Color.Black, new Cell(8, 'F'), 2));
-        // pieces.Add(new Knight(true, Color.Black, new Cell(8, 'G'), 2));
-        // pieces.Add(new Rook(true, Color.Black, new Cell(8, 'H'), 2));
-        // for (char c = 'A'; c <= 'H'; c++)
-        //     pieces.Add(new Pawn(true, Color.Black, new Cell(7, c), c - 'A' + 1));
+        pieces.Add(new Rook(true, Color.Black, new Cell(8, 'A'), 1));
+        pieces.Add(new Knight(true, Color.Black, new Cell(8, 'B'), 1));
+        pieces.Add(new Bishop(true, Color.Black, new Cell(8, 'C'), 1));
+        pieces.Add(new Queen(true, Color.Black, new Cell(8, 'D'), 1));
+        pieces.Add(new King(true, Color.Black, new Cell(8, 'E'), 1));
+        pieces.Add(new Bishop(true, Color.Black, new Cell(8, 'F'), 2));
+        pieces.Add(new Knight(true, Color.Black, new Cell(8, 'G'), 2));
+        pieces.Add(new Rook(true, Color.Black, new Cell(8, 'H'), 2));
+        for (char c = 'A'; c <= 'H'; c++)
+            pieces.Add(new Pawn(true, Color.Black, new Cell(7, c), c - 'A' + 1));
 
 
 
@@ -122,10 +122,10 @@ public class Program
         // pieces.Add(new Pawn(true, Color.Black, new Cell(7, 'E'), 1));
 
         // Check & Checkmate scenario
-        pieces.Add(new Pawn(true, Color.Black, new Cell(7, 'G'), 1));
-        pieces.Add(new Rook(true, Color.White, new Cell(7, 'A'), 1));
-        pieces.Add(new Rook(true, Color.White, new Cell(6, 'B'), 1));
-        pieces.Add(new King(true, Color.White, new Cell(1, 'E'), 1));
-        pieces.Add(new King(true, Color.Black, new Cell(8, 'E'), 1));
+        // pieces.Add(new Pawn(true, Color.Black, new Cell(7, 'G'), 1));
+        // pieces.Add(new Rook(true, Color.White, new Cell(7, 'A'), 1));
+        // pieces.Add(new Rook(true, Color.White, new Cell(6, 'B'), 1));
+        // pieces.Add(new King(true, Color.White, new Cell(1, 'E'), 1));
+        // pieces.Add(new King(true, Color.Black, new Cell(8, 'E'), 1));
     }
 }

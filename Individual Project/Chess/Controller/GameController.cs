@@ -382,16 +382,6 @@ public class GameController
         }
     }
 
-    public void CaptureOpponentPiece(Cell destinationCell, Color pieceColor)
-    {
-        IPiece? opponentPiece = pieces.FirstOrDefault(p => p.GetPosition().Equals(destinationCell) && p.GetIsAlive() && p.GetColor() != pieceColor);
-        if (opponentPiece != null)
-        {
-            opponentPiece.SetIsAlive(false);
-            System.Console.WriteLine($"{opponentPiece.GetPieceType()} milik {opponentPiece.GetColor()} ditangkap!");
-        }
-    }
-
     public IPiece PromotePawn(Pawn pawn)
     {
         System.Console.WriteLine("Choose a piece to promote your pawn to ((R) for Rook, (B) for Bishop, (N) for Knight, (Q) for Queen): ");
