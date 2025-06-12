@@ -3,7 +3,7 @@ using ProductCatalogAPI.DTOs;
 using ProductCatalogAPI.Services;
 
 namespace ProductCatalogAPI.Controllers
-{
+{   
     [ApiController]
     [Route("api/[controller]")]
     public class CategoriesController : ControllerBase
