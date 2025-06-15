@@ -16,9 +16,21 @@ public class CoursesController : Controller
         _context = context;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string SearchString)
     {
-        return View(await _context.Courses.ToListAsync());
+        if (_context.Courses == null)
+        {
+            return Problem("Entity set 'SchoolContext.Courses'  is null.");
+        }
+
+        var courses = from c in _context.Courses
+                       select c;
+
+        if (!String.IsNullOrEmpty(SearchString))
+        {
+            courses = courses.Where(s => s.Title!.ToUpper().Contains(SearchString.ToUpper()));
+        }
+        return View(await courses.ToListAsync());
     }
 
 }

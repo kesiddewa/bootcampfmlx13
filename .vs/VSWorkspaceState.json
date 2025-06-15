@@ -1,14 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Individual Project",
-    "\\Individual Project\\Chess",
-    "\\Individual Project\\Chess\\Controller",
-    "\\Individual Project\\Chess\\Enums",
-    "\\Individual Project\\Chess\\Interface",
-    "\\Individual Project\\Chess\\Model",
-    "\\Individual Project\\Chess\\Pieces"
+    "\\KlatenUniversityWebApp",
+    "\\KlatenUniversityWebApp\\Controllers",
+    "\\KlatenUniversityWebApp\\Data",
+    "\\KlatenUniversityWebApp\\Views",
+    "\\KlatenUniversityWebApp\\Views\\Students"
   ],
-  "SelectedNode": "\\Individual Project\\Chess\\Pieces\\King.cs",
+  "SelectedNode": "\\KlatenUniversityWebApp\\Controllers\\CoursesController.cs",
   "PreviewInSolutionExplorer": false
 }

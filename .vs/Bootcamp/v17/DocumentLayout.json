@@ -3,32 +3,20 @@
   "WorkspaceRootPath": "D:\\Work\\Formulatrix\\Bootcamp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Pieces\\King.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Individual Project\\Chess\\Pieces\\King.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Work\\Formulatrix\\Bootcamp\\KlatenUniversityWebApp\\Controllers\\CoursesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:KlatenUniversityWebApp\\Controllers\\CoursesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Pieces\\Knight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Individual Project\\Chess\\Pieces\\Knight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Work\\Formulatrix\\Bootcamp\\KlatenUniversityWebApp\\Controllers\\StudentsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:KlatenUniversityWebApp\\Controllers\\StudentsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Controller\\GameController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Individual Project\\Chess\\Controller\\GameController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Work\\Formulatrix\\Bootcamp\\KlatenUniversityWebApp\\Views\\Students\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:KlatenUniversityWebApp\\Views\\Students\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Model\\Player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Individual Project\\Chess\\Model\\Player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Interface\\IBoard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Individual Project\\Chess\\Interface\\IBoard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Model\\Board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Individual Project\\Chess\\Model\\Board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Interface\\IPlayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Individual Project\\Chess\\Interface\\IPlayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Work\\Formulatrix\\Bootcamp\\KlatenUniversityWebApp\\Data\\SchoolContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:KlatenUniversityWebApp\\Data\\SchoolContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,101 +26,60 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Knight.cs",
-              "DocumentMoniker": "D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Pieces\\Knight.cs",
-              "RelativeDocumentMoniker": "Individual Project\\Chess\\Pieces\\Knight.cs",
-              "ToolTip": "D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Pieces\\Knight.cs",
-              "RelativeToolTip": "Individual Project\\Chess\\Pieces\\Knight.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-28T08:39:57.399Z",
-              "EditorCaption": ""
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "King.cs",
-              "DocumentMoniker": "D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Pieces\\King.cs",
-              "RelativeDocumentMoniker": "Individual Project\\Chess\\Pieces\\King.cs",
-              "ToolTip": "D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Pieces\\King.cs*",
-              "RelativeToolTip": "Individual Project\\Chess\\Pieces\\King.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAFAAAAAAAAAA==",
+              "Title": "CoursesController.cs",
+              "DocumentMoniker": "D:\\Work\\Formulatrix\\Bootcamp\\KlatenUniversityWebApp\\Controllers\\CoursesController.cs",
+              "RelativeDocumentMoniker": "KlatenUniversityWebApp\\Controllers\\CoursesController.cs",
+              "ToolTip": "D:\\Work\\Formulatrix\\Bootcamp\\KlatenUniversityWebApp\\Controllers\\CoursesController.cs",
+              "RelativeToolTip": "KlatenUniversityWebApp\\Controllers\\CoursesController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwBkAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-28T08:39:54.117Z",
+              "WhenOpened": "2025-06-14T06:23:35.588Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "StudentsController.cs",
+              "DocumentMoniker": "D:\\Work\\Formulatrix\\Bootcamp\\KlatenUniversityWebApp\\Controllers\\StudentsController.cs",
+              "RelativeDocumentMoniker": "KlatenUniversityWebApp\\Controllers\\StudentsController.cs",
+              "ToolTip": "D:\\Work\\Formulatrix\\Bootcamp\\KlatenUniversityWebApp\\Controllers\\StudentsController.cs",
+              "RelativeToolTip": "KlatenUniversityWebApp\\Controllers\\StudentsController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-13T10:39:44.668Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "GameController.cs",
-              "DocumentMoniker": "D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Controller\\GameController.cs",
-              "RelativeDocumentMoniker": "Individual Project\\Chess\\Controller\\GameController.cs",
-              "ToolTip": "D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Controller\\GameController.cs",
-              "RelativeToolTip": "Individual Project\\Chess\\Controller\\GameController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-28T08:39:46.41Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Board.cs",
-              "DocumentMoniker": "D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Model\\Board.cs",
-              "RelativeDocumentMoniker": "Individual Project\\Chess\\Model\\Board.cs",
-              "ToolTip": "D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Model\\Board.cs",
-              "RelativeToolTip": "Individual Project\\Chess\\Model\\Board.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T14:17:44.484Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IBoard.cs",
-              "DocumentMoniker": "D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Interface\\IBoard.cs",
-              "RelativeDocumentMoniker": "Individual Project\\Chess\\Interface\\IBoard.cs",
-              "ToolTip": "D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Interface\\IBoard.cs",
-              "RelativeToolTip": "Individual Project\\Chess\\Interface\\IBoard.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T14:17:04.18Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "IPlayer.cs",
-              "DocumentMoniker": "D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Interface\\IPlayer.cs",
-              "RelativeDocumentMoniker": "Individual Project\\Chess\\Interface\\IPlayer.cs",
-              "ToolTip": "D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Interface\\IPlayer.cs",
-              "RelativeToolTip": "Individual Project\\Chess\\Interface\\IPlayer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T14:11:19.927Z"
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Work\\Formulatrix\\Bootcamp\\KlatenUniversityWebApp\\Views\\Students\\Index.cshtml",
+              "RelativeDocumentMoniker": "KlatenUniversityWebApp\\Views\\Students\\Index.cshtml",
+              "ToolTip": "D:\\Work\\Formulatrix\\Bootcamp\\KlatenUniversityWebApp\\Views\\Students\\Index.cshtml",
+              "RelativeToolTip": "KlatenUniversityWebApp\\Views\\Students\\Index.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-13T10:25:25.489Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Player.cs",
-              "DocumentMoniker": "D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Model\\Player.cs",
-              "RelativeDocumentMoniker": "Individual Project\\Chess\\Model\\Player.cs",
-              "ToolTip": "D:\\Work\\Formulatrix\\Bootcamp\\Individual Project\\Chess\\Model\\Player.cs",
-              "RelativeToolTip": "Individual Project\\Chess\\Model\\Player.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Title": "SchoolContext.cs",
+              "DocumentMoniker": "D:\\Work\\Formulatrix\\Bootcamp\\KlatenUniversityWebApp\\Data\\SchoolContext.cs",
+              "RelativeDocumentMoniker": "KlatenUniversityWebApp\\Data\\SchoolContext.cs",
+              "ToolTip": "D:\\Work\\Formulatrix\\Bootcamp\\KlatenUniversityWebApp\\Data\\SchoolContext.cs",
+              "RelativeToolTip": "KlatenUniversityWebApp\\Data\\SchoolContext.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAIMAAABUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T14:10:14.495Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T10:23:21.875Z"
             }
           ]
         }
