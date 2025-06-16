@@ -15,6 +15,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IValidator<Student>, StudentValidator>();
 
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
 // Register Generic Repository
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
@@ -25,7 +27,6 @@ builder.Services.AddScoped<IStudentsRepository, StudentsRepository>();
 builder.Services.AddScoped<IStudentsServices, StudentsServices>();
 
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

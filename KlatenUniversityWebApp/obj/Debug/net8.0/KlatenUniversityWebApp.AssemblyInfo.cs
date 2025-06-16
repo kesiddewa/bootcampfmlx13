@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KlatenUniversityWebApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a835da3e175814ba58c0f90692bae2b9d46dfa6f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b5d0ecfc3de1acd80edb7791f544740a70676fd1")]
 [assembly: System.Reflection.AssemblyProductAttribute("KlatenUniversityWebApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KlatenUniversityWebApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

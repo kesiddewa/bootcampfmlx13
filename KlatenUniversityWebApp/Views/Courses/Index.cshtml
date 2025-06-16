@@ -12,7 +12,7 @@
 
     <form asp-controller="Courses" asp-action="Index" method="get">
         <div class="input-group mb-3">
-            <span class="input-group-text">&#x1F50E;</span>
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
             <input class="form-control" type="text" name="SearchString" placeholder="Type to search..."/>
         </div>
     </form>
@@ -25,6 +25,10 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Title)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Credits)
+                </th>
+
             </tr>
         </thead>
         <tbody>
@@ -38,9 +42,16 @@
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td>
-                    <a class="btn btn-secondary btn-sm" asp-action="Details" asp-route-id="@item.CourseID">Details</a> |
-                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.CourseID">Edit</a> |
-                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.CourseID">Delete</a>
+                    @Html.DisplayFor(modelItem => item.Credits)
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.CourseID">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.CourseID">
+                        <i class="fas fa-trash"></i>
+                    </a>
                 </td>
             </tr>
         }

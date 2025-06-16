@@ -1,16 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
 using KlatenUniversityWebApp.Models;
 using KlatenUniversityWebApp.Services;
+using AutoMapper;
 
 namespace KlatenUniversityWebApp.Controllers;
 
 public class StudentsController : Controller
 {
     private readonly IStudentsServices _studentsServices;
+    private readonly IMapper _mapper;
 
-    public StudentsController(IStudentsServices studentsServices)
+    public StudentsController(IStudentsServices studentsServices, IMapper mapper)
     {
         _studentsServices = studentsServices;
+        _mapper = mapper;
     }
     public async Task<IActionResult> Index(string SearchString)
     {
@@ -35,22 +38,20 @@ public class StudentsController : Controller
         }
 
         return View(student);
-    }
-
-    public IActionResult Create()
+    }    public IActionResult Create()
     {
-        return View(new Student());
+        return View(new StudentDTO());
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Name,Email,PhoneNumber,Address,DateOfBirth,Major,EnrollmentDate")] Student student)
+    public async Task<IActionResult> Create([Bind("StudentName,Email,PhoneNumber,Address,DateOfBirth,StudentMajor,EnrollmentDate")] StudentDTO studentDto)
     {
         if (ModelState.IsValid)
         {
             try
             {
-                await _studentsServices.CreateStudentAsync(student);
+                await _studentsServices.CreateStudentAsync(studentDto);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -59,7 +60,7 @@ public class StudentsController : Controller
                 ModelState.AddModelError("", $"Error creating student: {ex.Message}");
             }
         }
-        return View(student);
+        return View(studentDto);
     }
 
     public async Task<IActionResult> Delete(int? id)
@@ -93,5 +94,48 @@ public class StudentsController : Controller
             ModelState.AddModelError("", $"Error deleting student: {ex.Message}");
             return View(nameof(Index));
         }
+    }
+    public async Task<IActionResult> Edit(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var studentDto = await _studentsServices.GetStudentByIdAsync(id.Value);
+        if (studentDto == null)
+        {
+            return NotFound();
+        }
+
+        return View(studentDto);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, [Bind("ID,StudentName,Email,PhoneNumber,Address,DateOfBirth,StudentMajor,EnrollmentDate")] StudentDTO studentDto)
+    {
+        if (id != studentDto.ID)
+        {
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                var success = await _studentsServices.UpdateStudent(studentDto);
+                if (!success)
+                {
+                    return NotFound();
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"Error updating student: {ex.Message}");
+            }
+        }
+        return View(studentDto);
     }
 }

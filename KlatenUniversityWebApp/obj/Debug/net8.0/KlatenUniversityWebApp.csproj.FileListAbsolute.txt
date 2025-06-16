@@ -261,3 +261,8 @@ C:\Users\Kesid Dewa\Bootcamp\KlatenUniversityWebApp\bin\Debug\net8.0\FluentValid
 C:\Users\Kesid Dewa\Bootcamp\KlatenUniversityWebApp\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
 C:\Users\Kesid Dewa\Bootcamp\KlatenUniversityWebApp\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\Kesid Dewa\Bootcamp\KlatenUniversityWebApp\obj\Debug\net8.0\KlatenUniversityWebApp.MvcApplicationPartsAssemblyInfo.cs
+D:\Work\Formulatrix\Bootcamp\KlatenUniversityWebApp\bin\Debug\net8.0\FluentValidation.dll
+D:\Work\Formulatrix\Bootcamp\KlatenUniversityWebApp\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
+D:\Work\Formulatrix\Bootcamp\KlatenUniversityWebApp\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+D:\Work\Formulatrix\Bootcamp\KlatenUniversityWebApp\obj\Debug\net8.0\KlatenUniversityWebApp.MvcApplicationPartsAssemblyInfo.cs
+D:\Work\Formulatrix\Bootcamp\KlatenUniversityWebApp\bin\Debug\net8.0\AutoMapper.dll

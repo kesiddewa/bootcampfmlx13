@@ -1,4 +1,4 @@
-@model IEnumerable<KlatenUniversityWebApp.Models.Student>
+@model IEnumerable<StudentDTO>
 
     @{
     ViewData["Title"] = "Students";
@@ -12,18 +12,18 @@
 
     <form asp-controller="Students" asp-action="Index" method="get">
         <div class="input-group mb-3">
-            <span class="input-group-text">&#x1F50E;</span>
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
             <input class="form-control" type="text" name="SearchString" placeholder="Type to search..."/>
         </div>
     </form>
     <table class="table">
         <thead>
-            <tr>
+            <tr>                
                 <th>
-                    @Html.DisplayNameFor(model => model.Name)
+                    @Html.DisplayNameFor(model => model.StudentName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Major)
+                    @Html.DisplayNameFor(model => model.StudentMajor)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.EnrollmentDate)
@@ -33,20 +33,24 @@
         <tbody>
             @foreach (var item in Model)
         {
-            <tr>
+            <tr>                
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelItem => item.StudentName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Major)
+                    @Html.DisplayFor(modelItem => item.StudentMajor)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.EnrollmentDate)
-                </td>
+                </td>                
                 <td>
-                    <a class="btn btn-secondary btn-sm" asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    <a class="btn btn-secondary btn-sm" asp-action="Details" asp-route-id="@item.ID">Details</a>
+                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.ID" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.ID" title="Delete">
+                        <i class="fas fa-trash"></i>
+                    </a>
                 </td>
             </tr>
         }

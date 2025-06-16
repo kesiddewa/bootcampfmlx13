@@ -1,11 +1,14 @@
 @model StudentDTO
 @{
-    ViewData["Title"] = "Create Student";
+    ViewData["Title"] = "Edit Student";
 }
-<h2>Create Student</h2>
-<form asp-action="Create" method="post">
+<h2>Edit Student</h2>
+<form asp-action="Edit" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-      <div class="mb-3">
+    
+    <input type="hidden" asp-for="ID" />
+    
+    <div class="mb-3">
         <label asp-for="StudentName" class="form-label"></label>
         <input asp-for="StudentName" class="form-control" />
         <span asp-validation-for="StudentName" class="text-danger"></span>
@@ -34,7 +37,8 @@
         <input asp-for="DateOfBirth" class="form-control" type="date" />
         <span asp-validation-for="DateOfBirth" class="text-danger"></span>
     </div>
-      <div class="mb-3">
+    
+    <div class="mb-3">
         <label asp-for="StudentMajor" class="form-label"></label>
         <input asp-for="StudentMajor" class="form-control" />
         <span asp-validation-for="StudentMajor" class="text-danger"></span>
@@ -47,7 +51,7 @@
     </div>
     
     <div class="mb-3">
-        <input type="submit" value="Create" class="btn btn-primary" />
+        <input type="submit" value="Save" class="btn btn-primary" />
         <a asp-action="Index" class="btn btn-secondary">Back to List</a>
     </div>
 </form>

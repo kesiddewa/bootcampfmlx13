@@ -1,6 +1,7 @@
 using KlatenUniversityWebApp.Repositories;
 using KlatenUniversityWebApp.Models;
 using KlatenUniversityWebApp.Data;
+using AutoMapper;
 
 namespace KlatenUniversityWebApp.Services
 {
@@ -8,44 +9,49 @@ namespace KlatenUniversityWebApp.Services
     {
         private readonly IStudentsRepository _studentsRepository;
         private readonly SchoolContext _context;
+        private readonly IMapper _mapper;
 
-        public StudentsServices(IStudentsRepository studentRepository, SchoolContext context)
+        public StudentsServices(IStudentsRepository studentRepository, SchoolContext context, IMapper mapper)
         {
             _context = context;
             _studentsRepository = studentRepository;
+            _mapper = mapper;
+        }
+        public async Task<IEnumerable<StudentDTO>> GetAllStudentsAsync()
+        {
+            var students = await _studentsRepository.GetAllAsync();
+            return _mapper.Map<IEnumerable<StudentDTO>>(students);
         }
 
-        public async Task<IEnumerable<Student>> GetAllStudentsAsync()
+        public async Task<StudentDTO?> GetStudentByIdAsync(int id)
         {
-            return await _studentsRepository.GetAllAsync();
+            var student = await _studentsRepository.GetByIdAsync(id);
+            return student != null ? _mapper.Map<StudentDTO>(student) : null;
         }
 
-        public async Task<Student?> GetStudentByIdAsync(int id)
+        public async Task<StudentDTO> CreateStudentAsync(StudentDTO studentDto)
         {
-            return await _studentsRepository.GetByIdAsync(id);
-        }
+            var student = _mapper.Map<Student>(studentDto);
 
-        public async Task<Student> CreateStudentAsync(Student student)
-        {
             if (student.EnrollmentDate == default(DateTime))
             {
                 student.EnrollmentDate = DateTime.Today;
             }
 
-
             await _studentsRepository.AddAsync(student);
             await _context.SaveChangesAsync();
 
-            return student;
+            return _mapper.Map<StudentDTO>(student);
         }
 
-        public async Task<bool> UpdateStudent(Student student)
+        public async Task<bool> UpdateStudent(StudentDTO studentDto)
         {
-            if (student == null)
+            if (studentDto == null)
             {
                 return false;
             }
 
+            var student = _mapper.Map<Student>(studentDto);
             _studentsRepository.UpdateAsync(student);
             return await _context.SaveChangesAsync() > 0;
         }
@@ -60,26 +66,28 @@ namespace KlatenUniversityWebApp.Services
 
             await _studentsRepository.DeleteAsync(student);
             return await _context.SaveChangesAsync() > 0;
-        }        public async Task<IEnumerable<Student>> SearchStudentsAsync(string searchString)
+        }
+        public async Task<IEnumerable<StudentDTO>> SearchStudentsAsync(string searchString)
         {
-            return await _studentsRepository.SearchStudentsAsync(searchString);
+            var students = await _studentsRepository.SearchStudentsAsync(searchString);
+            return _mapper.Map<IEnumerable<StudentDTO>>(students);
         }
 
-        public async Task<Student?> GetStudentWithEnrollmentsAsync(int id)
+        public async Task<StudentDTO?> GetStudentWithEnrollmentsAsync(int id)
         {
-            return await _studentsRepository.GetStudentWithEnrollmentsAsync(id);
+            var student = await _studentsRepository.GetStudentWithEnrollmentsAsync(id);
+            return student != null ? _mapper.Map<StudentDTO>(student) : null;
         }
 
     }
-
     public interface IStudentsServices
     {
-        Task<IEnumerable<Student>> GetAllStudentsAsync();
-        Task<Student?> GetStudentByIdAsync(int id);
-        Task<Student> CreateStudentAsync(Student student);
-        Task<bool> UpdateStudent(Student student);
+        Task<IEnumerable<StudentDTO>> GetAllStudentsAsync();
+        Task<StudentDTO?> GetStudentByIdAsync(int id);
+        Task<StudentDTO> CreateStudentAsync(StudentDTO studentDto);
+        Task<bool> UpdateStudent(StudentDTO studentDto);
         Task<bool> DeleteStudentAsync(int id);
-        Task<IEnumerable<Student>> SearchStudentsAsync(string SearchString);
-        Task<Student?> GetStudentWithEnrollmentsAsync(int id);
+        Task<IEnumerable<StudentDTO>> SearchStudentsAsync(string SearchString);
+        Task<StudentDTO?> GetStudentWithEnrollmentsAsync(int id);
     }
 }
