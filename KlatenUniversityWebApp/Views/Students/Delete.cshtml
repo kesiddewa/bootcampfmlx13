@@ -1,0 +1,144 @@
+@model KlatenUniversityWebApp.Models.Student
+
+@{
+    ViewData["Title"] = "Delete Student";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Delete Student
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning" role="alert">
+                        <i class="fas fa-warning me-2"></i>
+                        <strong>Warning!</strong> Are you sure you want to delete this student? This action cannot be undone.
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-muted">Student Information</h6>
+                            <dl class="row">
+                                <dt class="col-sm-4">Name:</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.Name)</dd>
+                                
+                                <dt class="col-sm-4">Email:</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.Email)</dd>
+                                
+                                <dt class="col-sm-4">Phone:</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.PhoneNumber)</dd>
+                                
+                                <dt class="col-sm-4">Major:</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.Major)</dd>
+                            </dl>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h6 class="text-muted">Additional Details</h6>
+                            <dl class="row">
+                                <dt class="col-sm-5">Date of Birth:</dt>
+                                <dd class="col-sm-7">@Html.DisplayFor(model => model.DateOfBirth)</dd>
+                                
+                                <dt class="col-sm-5">Address:</dt>
+                                <dd class="col-sm-7">@Html.DisplayFor(model => model.Address)</dd>
+                                
+                                <dt class="col-sm-5">Enrollment Date:</dt>
+                                <dd class="col-sm-7">@Html.DisplayFor(model => model.EnrollmentDate)</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-3 mt-4">
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-1"></i>
+                            Cancel
+                        </a>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">
+                            <i class="fas fa-trash me-1"></i>
+                            Delete Student
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteConfirmModalLabel">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Confirm Deletion
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fas fa-user-times text-danger mb-3" style="font-size: 3rem;"></i>
+                    <h5 class="mb-3">Are you absolutely sure?</h5>
+                    <p class="text-muted mb-4">
+                        You are about to permanently delete <strong>@Model.Name</strong> from the system.
+                        This action cannot be undone and will remove all associated data.
+                    </p>
+                    
+                    <div class="alert alert-danger mb-4">
+                        <small>
+                            <i class="fas fa-info-circle me-1"></i>
+                            This will also affect any course enrollments and related records.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i>
+                    Cancel
+                </button>
+                <form asp-action="Delete" method="post" class="d-inline">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="ID" />
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash me-1"></i>
+                        Yes, Delete Student
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Add some animation and focus management
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteModal = document.getElementById('deleteConfirmModal');
+            
+            deleteModal.addEventListener('shown.bs.modal', function () {
+                // Focus on the cancel button for better UX
+                const cancelButton = deleteModal.querySelector('.btn-secondary');
+                if (cancelButton) {
+                    cancelButton.focus();
+                }
+            });
+
+            // Add confirmation before submitting the form
+            const deleteForm = deleteModal.querySelector('form');
+            if (deleteForm) {
+                deleteForm.addEventListener('submit', function(e) {
+                    // Add a small delay to show the user that something is happening
+                    const submitButton = this.querySelector('button[type="submit"]');
+                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Deleting...';
+                    submitButton.disabled = true;
+                });
+            }
+        });
+    </script>
+}

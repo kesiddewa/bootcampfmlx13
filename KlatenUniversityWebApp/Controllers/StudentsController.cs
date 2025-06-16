@@ -1,76 +1,97 @@
 using Microsoft.AspNetCore.Mvc;
-using KlatenUniversityWebApp.Data;
-using Microsoft.EntityFrameworkCore;
 using KlatenUniversityWebApp.Models;
+using KlatenUniversityWebApp.Services;
 
 namespace KlatenUniversityWebApp.Controllers;
 
 public class StudentsController : Controller
 {
-    private readonly SchoolContext _context;
+    private readonly IStudentsServices _studentsServices;
 
-    public StudentsController(SchoolContext context)
+    public StudentsController(IStudentsServices studentsServices)
     {
-        _context = context;
+        _studentsServices = studentsServices;
     }
-
     public async Task<IActionResult> Index(string SearchString)
     {
-        if (_context.Students == null)
-        {
-            return Problem("Entity set 'SchoolContext.Students'  is null.");
-        }
+        var students = await _studentsServices.SearchStudentsAsync(SearchString);
 
-        var students = from s in _context.Students
-                       select s;
+        ViewBag.SearchString = SearchString;
 
-        if (!String.IsNullOrEmpty(SearchString))
-        {
-            students = students.Where(s => s.Name!.ToUpper().Contains(SearchString.ToUpper()) || s.Major.ToUpper().Contains(SearchString.ToUpper()));
-        }
-        return View(await students.ToListAsync());
+        return View(students);
     }
-
     public async Task<IActionResult> Details(int? id)
     {
-        if (id == null || _context.Students == null)
+        if (id == null)
         {
             return NotFound();
         }
 
-        var student = await _context.Students
-            .Include(s => s.Enrollments)
-                .ThenInclude(e => e.Course)
-            .AsNoTracking()
-            .FirstOrDefaultAsync(m => m.ID == id);
+        var student = await _studentsServices.GetStudentWithEnrollmentsAsync(id.Value);
+
+        if (student == null)
+        {
+            return NotFound();
+        }
 
         return View(student);
     }
 
     public IActionResult Create()
     {
-        return View();
+        return View(new Student());
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("Name,Email,PhoneNumber,Address,DateOfBirth,Major,EnrollmentDate")] Student student)
     {
-        try
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(student);
-                await _context.SaveChangesAsync();
+                await _studentsServices.CreateStudentAsync(student);
+
                 return RedirectToAction(nameof(Index));
             }
-        }
-        catch (DbUpdateException /* ex */)
-        {
-            //Log the error (uncomment ex variable name and write a log.
-            ModelState.AddModelError("", "Unable to save changes. " +
-                "Try again, and if the problem persists " +
-                "see your system administrator.");
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"Error creating student: {ex.Message}");
+            }
         }
         return View(student);
+    }
+
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var student = await _studentsServices.GetStudentByIdAsync(id.Value);
+
+        return View(student);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+
+        try
+        {
+            var success = await _studentsServices.DeleteStudentAsync(id);
+            if (!success)
+            {
+                return NotFound($"Student with ID {id} not found");
+            }
+            return RedirectToAction(nameof(Index));
+        }
+        catch (Exception ex)
+        {
+            ModelState.AddModelError("", $"Error deleting student: {ex.Message}");
+            return View(nameof(Index));
+        }
     }
 }

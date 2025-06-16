@@ -24,7 +24,7 @@ namespace KlatenUniversityWebApp.Data
                 .HasForeignKey(s => s.StudentID);
 
             modelBuilder.Entity<Course>()
-                .HasMany(s => s.Enrollments)
+                .HasMany(c => c.Enrollments)
                 .WithOne(e => e.Course)
                 .HasForeignKey(s => s.CourseID);
 

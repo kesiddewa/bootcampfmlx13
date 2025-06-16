@@ -257,3 +257,7 @@ D:\Work\Formulatrix\Bootcamp\KlatenUniversityWebApp\obj\Debug\net8.0\refint\Klat
 D:\Work\Formulatrix\Bootcamp\KlatenUniversityWebApp\obj\Debug\net8.0\KlatenUniversityWebApp.pdb
 D:\Work\Formulatrix\Bootcamp\KlatenUniversityWebApp\obj\Debug\net8.0\KlatenUniversityWebApp.genruntimeconfig.cache
 D:\Work\Formulatrix\Bootcamp\KlatenUniversityWebApp\obj\Debug\net8.0\ref\KlatenUniversityWebApp.dll
+C:\Users\Kesid Dewa\Bootcamp\KlatenUniversityWebApp\bin\Debug\net8.0\FluentValidation.dll
+C:\Users\Kesid Dewa\Bootcamp\KlatenUniversityWebApp\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
+C:\Users\Kesid Dewa\Bootcamp\KlatenUniversityWebApp\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\Kesid Dewa\Bootcamp\KlatenUniversityWebApp\obj\Debug\net8.0\KlatenUniversityWebApp.MvcApplicationPartsAssemblyInfo.cs

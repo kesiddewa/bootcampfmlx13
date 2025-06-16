@@ -1,4 +1,8 @@
+using FluentValidation;
 using KlatenUniversityWebApp.Data;
+using KlatenUniversityWebApp.Models;
+using KlatenUniversityWebApp.Repositories;
+using KlatenUniversityWebApp.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +13,19 @@ builder.Services.AddDbContext<SchoolContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddTransient<IValidator<Student>, StudentValidator>();
+
+// Register Generic Repository
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+// Register Specific Repositories
+builder.Services.AddScoped<IStudentsRepository, StudentsRepository>();
+
+// Register Services
+builder.Services.AddScoped<IStudentsServices, StudentsServices>();
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

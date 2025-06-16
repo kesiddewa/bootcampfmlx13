@@ -28,7 +28,7 @@ public class CoursesController : Controller
 
         if (!String.IsNullOrEmpty(SearchString))
         {
-            courses = courses.Where(s => s.Title!.ToUpper().Contains(SearchString.ToUpper()));
+            courses = courses.Where(s => s.Title!.ToUpper().Contains(SearchString.ToUpper()) || s.CourseID.ToString().Contains(SearchString));
         }
         return View(await courses.ToListAsync());
     }
