@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KlatenUniversityWebApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f46382980eb1daefd3de6f432c9e198f9e721c8a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+60d7746b53a7bac6dc7df280b76bc814fe3ec76c")]
 [assembly: System.Reflection.AssemblyProductAttribute("KlatenUniversityWebApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KlatenUniversityWebApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

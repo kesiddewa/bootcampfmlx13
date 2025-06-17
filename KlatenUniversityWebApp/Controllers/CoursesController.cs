@@ -30,7 +30,8 @@ public class CoursesController : Controller
     public IActionResult Create()
     {
         return View(new CourseDTO());
-    }    [HttpPost]
+    }
+    [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("CourseID,CourseTitle,CourseCredits")] CourseDTO courseDto)
     {
