@@ -1,36 +1,131 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using KlatenUniversityWebApp.Models;
-using KlatenUniversityWebApp.Data;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using KlatenUniversityWebApp.Services;
+using AutoMapper;
 
 namespace KlatenUniversityWebApp.Controllers;
 
 public class CoursesController : Controller
 {
-    private readonly SchoolContext _context;
+    private readonly ICoursesServices _coursesServices;
 
-    public CoursesController(SchoolContext context)
+    private readonly IMapper _mapper;
+
+
+    public CoursesController(ICoursesServices coursesServices, IMapper mapper)
     {
-        _context = context;
+        _coursesServices = coursesServices;
+        _mapper = mapper;
+
     }
 
     public async Task<IActionResult> Index(string SearchString)
     {
-        if (_context.Courses == null)
+        var course = await _coursesServices.SearchCoursesAsync(SearchString);
+
+        ViewBag.SearchString = SearchString;
+
+        return View(course);
+    }
+
+    public IActionResult Create()
+    {
+        return View(new CourseDTO());
+    }    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create([Bind("CourseID,CourseTitle,CourseCredits")] CourseDTO courseDto)
+    {
+        try
         {
-            return Problem("Entity set 'SchoolContext.Courses'  is null.");
+            if (ModelState.IsValid)
+            {
+                await _coursesServices.CreateCourseAsync(courseDto);
+                TempData["SuccessMessage"] = "Course created successfully!";
+                return RedirectToAction(nameof(Index));
+            }
+        }
+        catch (Exception ex)
+        {
+            ModelState.AddModelError("", $"Error creating course: {ex.Message}");
+        }
+        
+        // If we got to here, something went wrong
+        return View(courseDto);
+    }
+
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
         }
 
-        var courses = from c in _context.Courses
-                       select c;
+        var course = await _coursesServices.GetCourseByIdAsync(id.Value);
 
-        if (!String.IsNullOrEmpty(SearchString))
+        return View(course);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+
+        try
         {
-            courses = courses.Where(s => s.Title!.ToUpper().Contains(SearchString.ToUpper()) || s.CourseID.ToString().Contains(SearchString));
+            var success = await _coursesServices.DeleteCourseAsync(id);
+            if (!success)
+            {
+                return NotFound($"Course with ID {id} not found");
+            }
+            return RedirectToAction(nameof(Index));
         }
-        return View(await courses.ToListAsync());
+        catch (Exception ex)
+        {
+            ModelState.AddModelError("", $"Error deleting course: {ex.Message}");
+            return View(nameof(Index));
+        }
+    }
+    public async Task<IActionResult> Edit(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var courseDto = await _coursesServices.GetCourseByIdAsync(id.Value);
+        if (courseDto == null)
+        {
+            return NotFound();
+        }
+
+        return View(courseDto);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, [Bind("CourseID,CourseTitle,CourseCredits")] CourseDTO courseDto)
+    {
+        if (id != courseDto.CourseID)
+        {
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                var success = await _coursesServices.UpdateCourse(courseDto);
+                if (!success)
+                {
+                    return NotFound();
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"Error updating course: {ex.Message}");
+            }
+        }
+        return View(courseDto);
     }
 
 }

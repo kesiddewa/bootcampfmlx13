@@ -1,10 +1,19 @@
-@model IEnumerable<KlatenUniversityWebApp.Models.Course>
+@model IEnumerable<CourseDTO>
 
     @{
     ViewData["Title"] = "Index";
     }
 
     <h2>Courses</h2>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
 
     <p>
         <a class="btn btn-primary" asp-action="Create">Create New</a>
@@ -23,10 +32,10 @@
                     @Html.DisplayNameFor(model => model.CourseID)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Title)
+                    @Html.DisplayNameFor(model => model.CourseTitle)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Credits)
+                    @Html.DisplayNameFor(model => model.CourseCredits)
                 </th>
 
             </tr>
@@ -39,21 +48,111 @@
                     @Html.DisplayFor(modelItem => item.CourseID)
                 </th>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Title)
+                    @Html.DisplayFor(modelItem => item.CourseTitle)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Credits)
+                    @Html.DisplayFor(modelItem => item.CourseCredits)
                 </td>
                 <td>
                     <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.CourseID">
                         <i class="fas fa-edit"></i>
                     </a>
                     
-                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.CourseID">
+                    <button type="button" class="btn btn-danger btn-sm delete-btn" 
+                            data-bs-toggle="modal" data-bs-target="#deleteConfirmModal" 
+                            data-id="@item.CourseID" 
+                            data-title="@item.CourseTitle">
                         <i class="fas fa-trash"></i>
-                    </a>
+                    </button>
                 </td>
             </tr>
         }
         </tbody>
     </table>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteConfirmModalLabel">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Confirm Deletion
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <h5 class="mb-3">Are you absolutely sure?</h5>
+                    <p class="text-muted mb-4">
+                        You are about to permanently delete <strong id="courseTitle"></strong> from the system.
+                        This action cannot be undone and will remove all associated data.
+                    </p>
+                    
+                    <div class="alert alert-danger mb-4">
+                        <small>
+                            <i class="fas fa-info-circle me-1"></i>
+                            This will also affect any course enrollments and related records.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i>
+                    Cancel
+                </button>                <form id="deleteForm" asp-action="Delete" method="post" class="d-inline">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="courseIdToDelete" name="id" value="" />
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash me-1"></i>
+                        Yes, Delete Course
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup the delete modal
+            const deleteModal = document.getElementById('deleteConfirmModal');
+            
+            deleteModal.addEventListener('shown.bs.modal', function () {
+                const cancelButton = deleteModal.querySelector('.btn-secondary');
+                if (cancelButton) {
+                    cancelButton.focus();
+                }
+            });            deleteModal.addEventListener('show.bs.modal', function (event) {
+                // Button that triggered the modal
+                const button = event.relatedTarget;
+                // Extract info from data-* attributes
+                const courseId = button.getAttribute('data-id');
+                const courseTitle = button.getAttribute('data-title');
+                
+                console.log('Course ID to delete:', courseId); // Debug log
+                
+                // Update the modal's content
+                const modalTitle = deleteModal.querySelector('#courseTitle');
+                if (modalTitle) modalTitle.textContent = courseTitle;
+                
+                const courseIdInput = deleteModal.querySelector('#courseIdToDelete');
+                if (courseIdInput) {
+                    courseIdInput.value = courseId;
+                    console.log('Input value set to:', courseIdInput.value); // Debug log
+                }
+            });
+
+            const deleteForm = deleteModal.querySelector('form');
+            if (deleteForm) {
+                deleteForm.addEventListener('submit', function(e) {
+                    const submitButton = this.querySelector('button[type="submit"]');
+                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Deleting...';
+                    submitButton.disabled = true;
+                });
+            }
+        });
+    </script>
+}

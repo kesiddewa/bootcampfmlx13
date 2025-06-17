@@ -46,7 +46,8 @@ namespace KlatenUniversityWebApp.Repositories
             return await _dbSet
                 .Where(s => s.Name.ToLower().Contains(lowerSearchString) ||
                             s.Email.ToLower().Contains(lowerSearchString) ||
-                            s.Major.ToLower().Contains(lowerSearchString))                .OrderBy(s => s.Name)
+                            s.Major.ToLower().Contains(lowerSearchString))
+                            .OrderBy(s => s.Name)
                 .ToListAsync();
         }
 
@@ -54,7 +55,7 @@ namespace KlatenUniversityWebApp.Repositories
         {
             return await _dbSet
                 .Include(s => s.Enrollments)
-                    .ThenInclude(e => e.Course)
+                .ThenInclude(e => e.Course)
                 .FirstOrDefaultAsync(s => s.ID == id);
         }
     }

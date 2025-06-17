@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using KlatenUniversityWebApp.Models;
 
 namespace KlatenUniversityWebApp.Controllers;
-
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;

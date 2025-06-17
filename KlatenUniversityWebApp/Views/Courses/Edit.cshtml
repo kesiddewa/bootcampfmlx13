@@ -1,0 +1,38 @@
+@model CourseDTO
+@{
+    ViewData["Title"] = "Edit Course";
+}
+<h2>Edit Course</h2>
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="CourseID" class="form-label"></label>
+                <input asp-for="CourseID" class="form-control" />
+                <span asp-validation-for="CourseID" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="CourseTitle" class="form-label"></label>
+                <input asp-for="CourseTitle" class="form-control" />
+                <span asp-validation-for="CourseTitle" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="CourseCredits" class="form-label"></label>
+                <input asp-for="CourseCredits" class="form-control" />
+                <span asp-validation-for="CourseCredits" class="text-danger"></span>
+            </div>
+            
+            <div class="mb-3">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

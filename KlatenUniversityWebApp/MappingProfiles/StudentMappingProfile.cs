@@ -11,7 +11,9 @@ namespace KlatenUniversityWebApp.MappingProfiles
                 .ForMember(dest => dest.StudentName, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.StudentMajor, opt => opt.MapFrom(src => src.Major));
 
-            CreateMap<StudentDTO, Student>();
+            CreateMap<StudentDTO, Student>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.StudentName))
+                .ForMember(dest => dest.Major, opt => opt.MapFrom(src => src.StudentMajor));
         }
     }
 }

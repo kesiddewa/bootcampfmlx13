@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using KlatenUniversityWebApp.Models;
 using KlatenUniversityWebApp.Services;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KlatenUniversityWebApp.Controllers;
 
@@ -38,7 +38,8 @@ public class StudentsController : Controller
         }
 
         return View(student);
-    }    public IActionResult Create()
+    }    
+    public IActionResult Create()
     {
         return View(new StudentDTO());
     }

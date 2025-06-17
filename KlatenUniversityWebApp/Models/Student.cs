@@ -12,7 +12,9 @@ namespace KlatenUniversityWebApp.Models
         public string Major { get; set; }
         public DateTime EnrollmentDate { get; set; }
         public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
-    }    public class StudentValidator : AbstractValidator<Student>
+    }
+
+    public class StudentValidator : AbstractValidator<Student>
     {
         public StudentValidator()
         {
